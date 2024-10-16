@@ -270,7 +270,6 @@ getContent().then(data => {
                         console.log(sumArray(prices));
                         total.innerHTML = "₱" + sumArray(prices).toFixed(2);
 
-
                         // * (NEED TO FIX THIS) COMPUTE THE SUBTOTAL IF THE QUANTITY INPUT NUMBER IS MORE THAN 2
                         // const cartInputValue = document.querySelectorAll(".cart-input");
                         // const priceItem = document.querySelector(".cart-product-amount");
@@ -1326,8 +1325,7 @@ getContent().then(details => {
         productInput.value = store();
     });
 
-    // * (NEED TO FIX THE QUANTITY NUMBER INPUT OF THE CART WHEN THE VALUE OF MODAL INPUT NUMBER IS MORE THAN 2 QUANTITY) 
-    // ADD TO CART BUTTON ANIMATION AFTER CLICKED
+    // ADD TO CART BUTTON ANIMATION AFTER CLICKED IN PRODUCT PAGE
     const addToCartBtn = document.querySelectorAll(".addToCartBtn");
     addToCartBtn.forEach(addToCart => {
         addToCart.addEventListener("click", (event) => {
@@ -1342,16 +1340,16 @@ getContent().then(details => {
                     cartItem.setAttribute("id", targetIDBtn);
 
                     //* MAKE THE VALUE OF DATA-PRICE CORRECT BASED ON THE PRODUCT AMOUNT
-                    cartItem.setAttribute("data-price", 79.99);
-                    
+                    cartItem.setAttribute("data-price", 79.99);                    
+
                     cartItem.innerHTML = `
-                        <img class="product-img" id="${data.products[targetIDBtn].id}" src="${data.products[targetIDBtn].img}" alt="${data.products[targetIDBtn].name}">
+                        <img class="product-img" id="${details.products[targetIDBtn].id}" src="${details.products[targetIDBtn].img}" alt="${details.products[targetIDBtn].name}">
                         <div class="card-body">
-                            <h6 class="cart-product-name">${data.products[targetIDBtn].name}</h6>
-                            <h6 class="cart-product-amount">₱${data.products[targetIDBtn].amount}</h6>
-                            <div class="input-group cart-input-group" id="${data.products[targetIDBtn].id}">
+                            <h6 class="cart-product-name">${details.products[targetIDBtn].name}</h6>
+                            <h6 class="cart-product-amount">₱${details.products[targetIDBtn].amount}</h6>
+                            <div class="input-group cart-input-group" id="${details.products[targetIDBtn].id}">
                                 <button type="button" class="btn fa fa-minus signs" id="minus"></button> 
-                                <input type="number" class="cart-input" id="${data.products[targetIDBtn].id}" aria-label="Quantity" max="99999" min="1" value="1">
+                                <input type="number" class="cart-input" id="${details.products[targetIDBtn].id}" aria-label="Quantity" max="99999" min="1" value="1">
                                 <button type="button" class="btn fa fa-plus signs" id="plus"></button>
                             </div>
                         </div>
@@ -1359,12 +1357,11 @@ getContent().then(details => {
                     `;
                     document.querySelector('.item-list').appendChild(cartItem);
 
-                    // HIDE THE PRODUCT MODAL AFTER THE ANIMATION OF THE ADD TO CART BUTTON AND SHOW THE SIDEBAR/OFFCANVAS CART
-                    $("#product-modal").modal('hide');
+                    // SHOW THE SIDEBAR/OFFCANVAS CART
                     $("#cartOffcanvas").offcanvas('show');
                 }
                 catch {
-                    $("#product-modal").modal('hide');
+                    return addToCartBtn;
                 }
 
                 // * (NEED TO FIX) CAN CALCULATE THE TOTAL PRICES BUT IT CAN ONLY ADD 1 QUANTITY EACH ITEMS
@@ -1372,7 +1369,7 @@ getContent().then(details => {
                 const priceItems = document.querySelectorAll(".cart-product-amount");
                 const total = document.querySelector(".total-amount");
                 let prices = [];
-                
+
                 if(priceItems) {
                     priceItems.forEach(priceItem => {
                         let price = parseFloat(priceItem.innerText.replace("₱", ""));
@@ -1388,28 +1385,7 @@ getContent().then(details => {
                     return sum;
                 }
                 console.log(sumArray(prices));
-                total.innerHTML = "₱" + sumArray(prices).toFixed(2);
-
-
-                // * (NEED TO FIX THIS) COMPUTE THE SUBTOTAL IF THE QUANTITY INPUT NUMBER IS MORE THAN 2
-                // const cartInputValue = document.querySelectorAll(".cart-input");
-                // const priceItem = document.querySelector(".cart-product-amount");
-                // let totalQuantity = 0;
-                // let subtotal = 0;
-
-                // cartInputValue.forEach(quantity => {
-                //     console.log(quantity.value);
-                        
-                //     let newQuantity = quantity.value;
-                //     console.log(newQuantity);
-
-                //     totalQuantity = parseInt(totalQuantity) + parseInt(newQuantity);
-                //     console.log(totalQuantity);
-
-                //     subtotal = sumArray(prices) * parseInt(totalQuantity);
-                //     console.log("₱" + subtotal);
-                //     document.querySelector(".total-amount").innerHTML = "₱" + subtotal.toFixed(2);
-                // });                        
+                total.innerHTML = "₱" + sumArray(prices).toFixed(2);                       
 
                 // * (NEED TO FIX) IT CAN ONLY REMOVE THE LAST ELEMENT OF THE PRICES ARRAY
                 // Remove the element of an array if the removeItemBtn clicked
@@ -1435,18 +1411,18 @@ getContent().then(details => {
                 //         removeItemBtn.addEventListener('click', () => {
                 //             const cardItem = removeItemBtn.parentElement;
                 //             let itemRemoved = cardItem.remove();
-                            
+                        
                 //             // REMOVE SPECIFIC ITEM FROM PRICES ARRAY
                 //             const removePrice = prices.filter(item => item !== itemRemoved);
                 //             console.log(removePrice);
-                            
+                        
                 //             // const newPrices = prices.reduce((acc, val) => acc + val, 0);
                 //             // priceItem();
 
                 //             // GET THE PREVIOUS PRICES ARRAY AND MINUS THE NEW PRICE ARRAY TO GET THE NEW SUBTOTAL PRICE
                 //             let totalPrice = sumArray(prices) - parseFloat(removePrice);
                 //             // console.log(totalPrice.toFixed(2));
-                            
+                        
                 //             // LOAD NEW SUBTOTAL PRICE
                 //             setTimeout(() => {
                 //                 total.innerHTML = "₱" + totalPrice.toFixed(2);
@@ -1464,72 +1440,72 @@ getContent().then(details => {
                 // removeCartItems(prices);
                 const removeBtns = document.querySelectorAll('.remove-btn');
                 removeBtns.forEach(removeItemBtn => {
-                    removeItemBtn.addEventListener('click', () => {
-                        const cardItem = removeItemBtn.parentElement;
-                        console.log(cardItem);
-                        cardItem.remove();
+                removeItemBtn.addEventListener('click', () => {
+                    const cardItem = removeItemBtn.parentElement;
+                    console.log(cardItem);
+                    cardItem.remove();
 
-                        // let itemRemoved = cardItem.remove();
-                        // console.log(itemRemoved);
+                    // let itemRemoved = cardItem.remove();
+                    // console.log(itemRemoved);
 
-                        // REMOVE SPECIFIC ITEM FROM PRICES ARRAY
-                        // const removeItemPrice = prices.filter(item => item !== cardItem);
-                        // console.log(removeItemPrice);
+                    // REMOVE SPECIFIC ITEM FROM PRICES ARRAY
+                    // const removeItemPrice = prices.filter(item => item !== cardItem);
+                    // console.log(removeItemPrice);
 
-                        const removePrice = parseFloat(cardItem.getAttribute('data-price'));
-                        console.log(removePrice);
+                    const removePrice = parseFloat(cardItem.getAttribute('data-price'));
+                    console.log(removePrice);
 
-                        prices = prices.filter(item => item !== removePrice);
-                        console.log(prices);
+                    prices = prices.filter(item => item !== removePrice);
+                    console.log(prices);
 
-                        // UPDATE THE sumArray(prices)
-                        console.log(parseFloat(sumArray(prices)));
-                        
-                        // LOAD NEW SUBTOTAL PRICE
-                        setTimeout(() => {
-                            total.innerHTML = "₱" + sumArray(prices).toFixed(2);
-                            // if(total.innerText == "₱0.00") {
-                            //     itemList.style.display = "none";
-                            //     subtotal.style.display = "none";
-                            //     emptyText.style.display = "block";
-                            //     offcanvasFooter.style.display = "none";
-                            //     itemCounterText.textContent = 0;
-                            // }
-                        }, 2000)
-                    });
+                    // UPDATE THE sumArray(prices)
+                    console.log(parseFloat(sumArray(prices)));
+                    
+                    // LOAD NEW SUBTOTAL PRICE
+                    setTimeout(() => {
+                        total.innerHTML = "₱" + sumArray(prices).toFixed(2);
+                        // if(total.innerText == "₱0.00") {
+                        //     itemList.style.display = "none";
+                        //     subtotal.style.display = "none";
+                        //     emptyText.style.display = "block";
+                        //     offcanvasFooter.style.display = "none";
+                        //     itemCounterText.textContent = 0;
+                        // }
+                    }, 2000)
+                });
                 });
 
                 // CART ITEM LIST COUNTER
                 function cartItemsCounter() {
-                    const cartItemCounter = document.querySelectorAll('.cart-input-group .cart-input');
-                    const itemCounterText = document.getElementById("items-count");
-                    let cartCounter = 0;
-                    
-                    const itemList = document.querySelector('.item-list');
-                    const subtotal = document.querySelector('.total');
-                    const emptyText = document.querySelector('.empty-cart');
-                    const offcanvasFooter = document.querySelector('.offcanvas-footer');
+                const cartItemCounter = document.querySelectorAll('.cart-input-group .cart-input');
+                const itemCounterText = document.getElementById("items-count");
+                let cartCounter = 0;
 
-                    cartItemCounter.forEach(itemCounter => {
-                        let counterValue = parseInt(itemCounter.value);
-                        let totalCountValue = cartCounter + counterValue;
-                        cartCounter = totalCountValue;
-                        itemCounterText.textContent = totalCountValue;
+                const itemList = document.querySelector('.item-list');
+                const subtotal = document.querySelector('.total');
+                const emptyText = document.querySelector('.empty-cart');
+                const offcanvasFooter = document.querySelector('.offcanvas-footer');
 
-                        // IF THERES NO ITEMS ON THE CART HIDE THE ITEM LIST, SUBTOTAL, VIEW CART BUTTON BUT WHEN THERES ITEM TOGGLE THEM TO SHOW THE ITEM AND SUBTOTAL AND HIDE THE EMPTY TEXT
-                        if(totalCountValue == 0) {
-                            itemList.style.display = 'none';
-                            subtotal.style.display = 'none';
-                            emptyText.style.display = 'block';
-                            offcanvasFooter.style.display = 'none';
-                        }
-                        else {
-                            itemList.style.display = 'block';
-                            subtotal.style.display = 'block';
-                            emptyText.style.display = 'none';
-                            offcanvasFooter.style.display = 'flex';
-                        }
-                    });
+                cartItemCounter.forEach(itemCounter => {
+                    let counterValue = parseInt(itemCounter.value);
+                    let totalCountValue = cartCounter + counterValue;
+                    cartCounter = totalCountValue;
+                    itemCounterText.textContent = totalCountValue;
+
+                    // IF THERES NO ITEMS ON THE CART HIDE THE ITEM LIST, SUBTOTAL, VIEW CART BUTTON BUT WHEN THERES ITEM TOGGLE THEM TO SHOW THE ITEM AND SUBTOTAL AND HIDE THE EMPTY TEXT
+                    if(totalCountValue == 0) {
+                        itemList.style.display = 'none';
+                        subtotal.style.display = 'none';
+                        emptyText.style.display = 'block';
+                        offcanvasFooter.style.display = 'none';
+                    }
+                    else {
+                        itemList.style.display = 'block';
+                        subtotal.style.display = 'block';
+                        emptyText.style.display = 'none';
+                        offcanvasFooter.style.display = 'flex';
+                    }
+                });
                 }
                 cartItemsCounter();
 
@@ -1551,9 +1527,6 @@ getContent().then(details => {
                         var newValue = parseInt(inputValue) + 1;
                         // console.log(newValue);
                         input.value = newValue;
-
-                        input.setAttribute("value", newValue);
-                        cartItemsCounter();
                     });
                 }
                 // console.log(decrementButton);
@@ -1570,26 +1543,20 @@ getContent().then(details => {
                         // console.log(newValue);
                         if(newValue >= 1) {
                             input.value = newValue;
-
-                            input.setAttribute("value", newValue);
-                            cartItemsCounter();
                         }
                         else {
                             input.value = 1;
-
-                            input.setAttribute("value", newValue);
-                            cartItemsCounter();
                         }
                     });
                 }
 
-                // IF THE PRODUCT IMAGES IN CART CLICKED REDIRECT IT TO PRODUCT PAGE
+                // IF THE PRODUCT IMAGES IN CART CLICKED HIDE THE SIDEBAR/OFFCANVAS CART
                 function productImages(){
                     const productImage = document.querySelectorAll('.product-img');
                     productImage.forEach(productImg => {
                         productImg.addEventListener('click', () => {
-                            // * CHANGE THE http://127.0.0.1:5500/product.html TO ACTUAL LINK OF THE PRODUCT PAGE
-                            window.location = "http://127.0.0.1:5500/product.html";
+                            // HIDE THE SIDEBAR/OFFCANVAS CART
+                            $("#cartOffcanvas").offcanvas('hide');
                         });
                     });
                 }

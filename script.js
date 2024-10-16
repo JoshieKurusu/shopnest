@@ -245,6 +245,7 @@ getContent().then(data => {
                         }
                         catch {
                             $("#product-modal").modal('hide');
+                            return addToCartBtn;
                         }
 
                         // * (NEED TO FIX) CAN CALCULATE THE TOTAL PRICES BUT IT CAN ONLY ADD 1 QUANTITY EACH ITEMS
@@ -364,6 +365,9 @@ getContent().then(data => {
                                 // UPDATE THE sumArray(prices)
                                 console.log(parseFloat(sumArray(prices)));
                                 
+                                //UPDATE THE CART ITEM COUNTER
+                                cartItemsCounter();
+                                
                                 // LOAD NEW SUBTOTAL PRICE
                                 setTimeout(() => {
                                     total.innerHTML = "₱" + sumArray(prices).toFixed(2);
@@ -414,7 +418,6 @@ getContent().then(data => {
 
                         // * (NEED TO FIX) WHEN THE ITEM ON THE CART IS MORE THAN 2 THE FIRST INPUT NUMBER VALUE IS ADDING BASED ON THE NUMBER OF THE ITEMS
                         // MULTIPLE INPUT NUMBER INSIDE THE CART SIDEBAR
-                        // Testing 1
                         var decrementButton = document.getElementsByClassName("fa-minus");
                         var incrementButton = document.getElementsByClassName("fa-plus");
                         // console.log(incrementButton);
@@ -430,7 +433,6 @@ getContent().then(data => {
                                 var newValue = parseInt(inputValue) + 1;
                                 // console.log(newValue);
                                 input.value = newValue;
-
                                 input.setAttribute("value", newValue);
                                 cartItemsCounter();
                             });
@@ -440,7 +442,7 @@ getContent().then(data => {
                             var button = decrementButton[i];
                             button.addEventListener('click', (event) => {
                                 var buttonClicked = event.target;
-                                // console.log(buttonClicked);
+                                console.log(buttonClicked);
                                 var input = buttonClicked.parentElement.children[1];
                                 // console.log(input);
                                 var inputValue = input.value;
@@ -449,13 +451,11 @@ getContent().then(data => {
                                 // console.log(newValue);
                                 if(newValue >= 1) {
                                     input.value = newValue;
-
                                     input.setAttribute("value", newValue);
                                     cartItemsCounter();
                                 }
                                 else {
                                     input.value = 1;
-
                                     input.setAttribute("value", newValue);
                                     cartItemsCounter();
                                 }
@@ -1460,6 +1460,8 @@ getContent().then(details => {
 
                     // UPDATE THE sumArray(prices)
                     console.log(parseFloat(sumArray(prices)));
+
+                    cartItemsCounter();
                     
                     // LOAD NEW SUBTOTAL PRICE
                     setTimeout(() => {
@@ -1477,41 +1479,40 @@ getContent().then(details => {
 
                 // CART ITEM LIST COUNTER
                 function cartItemsCounter() {
-                const cartItemCounter = document.querySelectorAll('.cart-input-group .cart-input');
-                const itemCounterText = document.getElementById("items-count");
-                let cartCounter = 0;
+                    const cartItemCounter = document.querySelectorAll('.cart-input-group .cart-input');
+                    const itemCounterText = document.getElementById("items-count");
+                    let cartCounter = 0;
+                    
+                    const itemList = document.querySelector('.item-list');
+                    const subtotal = document.querySelector('.total');
+                    const emptyText = document.querySelector('.empty-cart');
+                    const offcanvasFooter = document.querySelector('.offcanvas-footer');
 
-                const itemList = document.querySelector('.item-list');
-                const subtotal = document.querySelector('.total');
-                const emptyText = document.querySelector('.empty-cart');
-                const offcanvasFooter = document.querySelector('.offcanvas-footer');
+                    cartItemCounter.forEach(itemCounter => {
+                        let counterValue = parseInt(itemCounter.value);
+                        let totalCountValue = cartCounter + counterValue;
+                        cartCounter = totalCountValue;
+                        itemCounterText.textContent = totalCountValue;
 
-                cartItemCounter.forEach(itemCounter => {
-                    let counterValue = parseInt(itemCounter.value);
-                    let totalCountValue = cartCounter + counterValue;
-                    cartCounter = totalCountValue;
-                    itemCounterText.textContent = totalCountValue;
-
-                    // IF THERES NO ITEMS ON THE CART HIDE THE ITEM LIST, SUBTOTAL, VIEW CART BUTTON BUT WHEN THERES ITEM TOGGLE THEM TO SHOW THE ITEM AND SUBTOTAL AND HIDE THE EMPTY TEXT
-                    if(totalCountValue == 0) {
-                        itemList.style.display = 'none';
-                        subtotal.style.display = 'none';
-                        emptyText.style.display = 'block';
-                        offcanvasFooter.style.display = 'none';
-                    }
-                    else {
-                        itemList.style.display = 'block';
-                        subtotal.style.display = 'block';
-                        emptyText.style.display = 'none';
-                        offcanvasFooter.style.display = 'flex';
-                    }
-                });
+                        // IF THERES NO ITEMS ON THE CART HIDE THE ITEM LIST, SUBTOTAL, VIEW CART BUTTON BUT WHEN THERES ITEM TOGGLE THEM TO SHOW THE ITEM AND SUBTOTAL AND HIDE THE EMPTY TEXT
+                        if(totalCountValue == 0) {
+                            itemList.style.display = 'none';
+                            subtotal.style.display = 'none';
+                            emptyText.style.display = 'block';
+                            offcanvasFooter.style.display = 'none';
+                        }
+                        else {
+                            itemList.style.display = 'block';
+                            subtotal.style.display = 'block';
+                            emptyText.style.display = 'none';
+                            offcanvasFooter.style.display = 'flex';
+                        }
+                    });
                 }
                 cartItemsCounter();
 
                 // * (NEED TO FIX) WHEN THE ITEM ON THE CART IS MORE THAN 2 THE FIRST INPUT NUMBER VALUE IS ADDING BASED ON THE NUMBER OF THE ITEMS
                 // MULTIPLE INPUT NUMBER INSIDE THE CART SIDEBAR
-                // Testing 1
                 var decrementButton = document.getElementsByClassName("fa-minus");
                 var incrementButton = document.getElementsByClassName("fa-plus");
                 // console.log(incrementButton);
@@ -1527,6 +1528,9 @@ getContent().then(details => {
                         var newValue = parseInt(inputValue) + 1;
                         // console.log(newValue);
                         input.value = newValue;
+
+                        input.setAttribute("value", newValue);
+                        cartItemsCounter();
                     });
                 }
                 // console.log(decrementButton);
@@ -1543,9 +1547,15 @@ getContent().then(details => {
                         // console.log(newValue);
                         if(newValue >= 1) {
                             input.value = newValue;
+
+                            input.setAttribute("value", newValue);
+                            cartItemsCounter();
                         }
                         else {
                             input.value = 1;
+
+                            input.setAttribute("value", newValue);
+                            cartItemsCounter();
                         }
                     });
                 }

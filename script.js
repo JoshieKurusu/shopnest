@@ -1390,41 +1390,39 @@ getContent().then(details => {
                     });
                 })
 
-                // * (NEED TO FIX THIS FUNCTION) MAKE THIS COUNTER BASED ON THE QUANTITY OF THE INPUT NUMBER
                 // CART ITEM LIST COUNTER
-                function cartItemCounter() {
-                    // var itemListCounter = document.querySelectorAll('#cart-input-quantity-number');
-                    // itemListCounter.forEach(item => {
-                    //     const itemCounterText = document.getElementById("items-count");
-                    //     itemCounterText.textContent = itemListCounter;
-                    // });
-
-                    // Temporary item counting
-                    // var itemListCounter = document.querySelectorAll('#cart-input-quantity-number').length;
-                    var itemListCounter = document.querySelectorAll('.item-list .card').length;
+                function cartItemsCounter() {
+                    const cartItemCounter = document.querySelectorAll('.cart-input-group .cart-input');
                     const itemCounterText = document.getElementById("items-count");
-                    itemCounterText.textContent = itemListCounter;
+                    let cartCounter = 0;
                     
-                    // If No items on the cart hide the item list, total, and offcanvas footer and if theres hide the empty text
                     const itemList = document.querySelector('.item-list');
                     const subtotal = document.querySelector('.total');
                     const emptyText = document.querySelector('.empty-cart');
                     const offcanvasFooter = document.querySelector('.offcanvas-footer');
 
-                    if(itemListCounter == 0) {
-                        itemList.style.display = 'none';
-                        subtotal.style.display = 'none';
-                        emptyText.style.display = 'block';
-                        offcanvasFooter.style.display = 'none';
-                    }
-                    else {
-                        itemList.style.display = 'block';
-                        subtotal.style.display = 'block';
-                        emptyText.style.display = 'none';
-                        offcanvasFooter.style.display = 'block';
-                    }
+                    cartItemCounter.forEach(itemCounter => {
+                        let counterValue = parseInt(itemCounter.value);
+                        let totalCountValue = cartCounter + counterValue;
+                        cartCounter = totalCountValue;
+                        itemCounterText.textContent = totalCountValue;
+
+                        // IF THERES NO ITEMS ON THE CART HIDE THE ITEM LIST, SUBTOTAL, VIEW CART BUTTON BUT WHEN THERES ITEM TOGGLE THEM TO SHOW THE ITEM AND SUBTOTAL AND HIDE THE EMPTY TEXT
+                        if(totalCountValue == 0) {
+                            itemList.style.display = 'none';
+                            subtotal.style.display = 'none';
+                            emptyText.style.display = 'block';
+                            offcanvasFooter.style.display = 'none';
+                        }
+                        else {
+                            itemList.style.display = 'block';
+                            subtotal.style.display = 'block';
+                            emptyText.style.display = 'none';
+                            offcanvasFooter.style.display = 'flex';
+                        }
+                    });
                 }
-                cartItemCounter();
+                cartItemsCounter();
 
                 // * (NEED TO FIX) WHEN THE ITEM ON THE CART IS MORE THAN 2 THE FIRST INPUT NUMBER VALUE IS ADDING BASED ON THE NUMBER OF THE ITEMS
                 // MULTIPLE INPUT NUMBER INSIDE THE CART SIDEBAR

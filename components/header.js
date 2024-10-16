@@ -249,6 +249,7 @@ class Header extends HTMLElement {
                             align-items: center;
                             flex-direction: column;
                             .item-list {
+                                display: none;
                                 width: 100%;
                                 flex: 1;
                                 overflow-x: hidden;
@@ -367,6 +368,7 @@ class Header extends HTMLElement {
                                 overflow: hidden;
                                 margin-top: 20px;
                                 text-align: left;
+                                display: none;
                                 h3 {
                                     height: 39px;
                                     margin: 0;         
@@ -378,7 +380,7 @@ class Header extends HTMLElement {
                             .empty-cart {
                                 height: 30px;
                                 margin: 0;
-                                display: none;
+                                display: block;
                                 font-family: 'Times New Roman', Times, serif;
                                 font-size: clamp(1.125rem, 0vw + 1.125rem, 1.125rem);
                                 line-height: clamp(1.969rem, 0vw + 1.969rem, 1.969rem); 
@@ -389,6 +391,7 @@ class Header extends HTMLElement {
                             padding: 0 34px;
                             align-items: center;
                             justify-content: center;
+                            display: none;
                             a {
                                 width: 100%;
                                 padding: 13px;

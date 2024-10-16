@@ -174,7 +174,8 @@ class Header extends HTMLElement {
                                 width: 100%;
                                 border: 1px solid #666;
                                 height: 50px;
-                                margin-top: 14px;;
+                                margin-top: 14px;
+                                pointer-events: none;
                                 .btn {
                                     width: 40px;
                                     color: #797979;

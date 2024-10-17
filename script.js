@@ -220,10 +220,6 @@ getContent().then(data => {
                             const cartItem = document.createElement('div');
                             cartItem.classList.add("card");
                             cartItem.setAttribute("id", targetIDBtn);
-
-                            //* MAKE THE VALUE OF DATA-PRICE CORRECT BASED ON THE PRODUCT AMOUNT
-                            cartItem.setAttribute("data-price", 79.99);
-                            
                             cartItem.innerHTML = `
                                 <img class="product-img" id="${data.products[targetIDBtn].id}" src="${data.products[targetIDBtn].img}" alt="${data.products[targetIDBtn].name}">
                                 <div class="card-body">
@@ -242,6 +238,38 @@ getContent().then(data => {
                             // HIDE THE PRODUCT MODAL AFTER THE ANIMATION OF THE ADD TO CART BUTTON AND SHOW THE SIDEBAR/OFFCANVAS CART
                             $("#product-modal").modal('hide');
                             $("#cartOffcanvas").offcanvas('show');
+
+                            // PUT DATA-PRICE ATTRIBUTE OF THE ITEM BASED ON THE PRODUCT AMOUNT
+                            if(targetIDBtn == 0) {
+                                cartItem.setAttribute("data-price", 79.99);
+                            }
+                            else if(targetIDBtn == 1) {
+                                cartItem.setAttribute("data-price", 45.99);
+                            }
+                            else if(targetIDBtn == 2) {
+                                cartItem.setAttribute("data-price", 24.99);
+                            }
+                            else if(targetIDBtn == 3) {
+                                cartItem.setAttribute("data-price", 49.99);
+                            }
+                            else if(targetIDBtn == 4) {
+                                cartItem.setAttribute("data-price", 29.99);
+                            }
+                            else if(targetIDBtn == 5) {
+                                cartItem.setAttribute("data-price", 74.99);
+                            }
+                            else if(targetIDBtn == 6) {
+                                cartItem.setAttribute("data-price", 49.99);
+                            }
+                            else if(targetIDBtn == 7) {
+                                cartItem.setAttribute("data-price", 25.99);
+                            }
+                            else if(targetIDBtn == 8) {
+                                cartItem.setAttribute("data-price", 24.99);
+                            }
+                            else {
+                                return addToCartBtn;
+                            }
                         }
                         catch {
                             $("#product-modal").modal('hide');
@@ -259,7 +287,7 @@ getContent().then(data => {
                                 let price = parseFloat(priceItem.innerText.replace("₱", ""));
                                 prices.push(price);
                             });
-                            console.log(prices);
+                            // console.log(prices);
                         }
                         function sumArray(prices) {
                             let sum = 0;
@@ -268,7 +296,7 @@ getContent().then(data => {
                             }
                             return sum;
                         }
-                        console.log(sumArray(prices));
+                        // console.log(sumArray(prices));
                         total.innerHTML = "₱" + sumArray(prices).toFixed(2);
 
                         // * (NEED TO FIX THIS) COMPUTE THE SUBTOTAL IF THE QUANTITY INPUT NUMBER IS MORE THAN 2
@@ -290,102 +318,42 @@ getContent().then(data => {
                         //     console.log("₱" + subtotal);
                         //     document.querySelector(".total-amount").innerHTML = "₱" + subtotal.toFixed(2);
                         // });                        
-
-                        // * (NEED TO FIX) IT CAN ONLY REMOVE THE LAST ELEMENT OF THE PRICES ARRAY
-                        // Remove the element of an array if the removeItemBtn clicked
-                        // function removeElementArray() {
-                        //     const newPrices = (prices, item) => prices.filter(i => i !== item);
-                        //     console.log(newPrices);
-                        // }          
-
-                        // function minusArray(prices) {
-                        //     let minus = 0;
-                        //     for(let i = 0; i < prices.length; i++) {
-                        //         minus -= prices[i];
-                        //     }
-                        //     return minus;
-                        // }
-                        // console.log(minusArray(prices));
-                        // total.innerHTML = "₱" + minusArray(prices).toFixed(2);
-
-                        // REMOVE ITEM ON THE CART AND UPDATE THE TOTAL PRICE
-                        // function removeCartItems(prices) {
-                        //     const removeBtns = document.querySelectorAll('.remove-btn');
-                        //     removeBtns.forEach(removeItemBtn => {
-                        //         removeItemBtn.addEventListener('click', () => {
-                        //             const cardItem = removeItemBtn.parentElement;
-                        //             let itemRemoved = cardItem.remove();
-                                    
-                        //             // REMOVE SPECIFIC ITEM FROM PRICES ARRAY
-                        //             const removePrice = prices.filter(item => item !== itemRemoved);
-                        //             console.log(removePrice);
-                                    
-                        //             // const newPrices = prices.reduce((acc, val) => acc + val, 0);
-                        //             // priceItem();
-
-                        //             // GET THE PREVIOUS PRICES ARRAY AND MINUS THE NEW PRICE ARRAY TO GET THE NEW SUBTOTAL PRICE
-                        //             let totalPrice = sumArray(prices) - parseFloat(removePrice);
-                        //             // console.log(totalPrice.toFixed(2));
-                                    
-                        //             // LOAD NEW SUBTOTAL PRICE
-                        //             setTimeout(() => {
-                        //                 total.innerHTML = "₱" + totalPrice.toFixed(2);
-                        //                 // if(total.innerText == "₱0.00") {
-                        //                 //     itemList.style.display = "none";
-                        //                 //     subtotal.style.display = "none";
-                        //                 //     emptyText.style.display = "block";
-                        //                 //     offcanvasFooter.style.display = "none";
-                        //                 //     itemCounterText.textContent = 0;
-                        //                 // }
-                        //             }, 2000)
-                        //         });
-                        //     });
-                        // }
-                        // removeCartItems(prices);
                         const removeBtns = document.querySelectorAll('.remove-btn');
                         removeBtns.forEach(removeItemBtn => {
                             removeItemBtn.addEventListener('click', () => {
+                                // REMOVE THE ITEM IN THE ITEM LIST WHEN THE REMOVE BTN CLICKED
                                 const cardItem = removeItemBtn.parentElement;
-                                console.log(cardItem);
+                                // console.log(cardItem);
                                 cardItem.remove();
-
-                                // let itemRemoved = cardItem.remove();
-                                // console.log(itemRemoved);
-
                                 // REMOVE SPECIFIC ITEM FROM PRICES ARRAY
-                                // const removeItemPrice = prices.filter(item => item !== cardItem);
-                                // console.log(removeItemPrice);
-
                                 const removePrice = parseFloat(cardItem.getAttribute('data-price'));
-                                console.log(removePrice);
-
+                                // console.log(removePrice);
                                 prices = prices.filter(item => item !== removePrice);
-                                console.log(prices);
-
-                                // UPDATE THE sumArray(prices)
-                                console.log(parseFloat(sumArray(prices)));
-                                
+                                // console.log(prices);
                                 //UPDATE THE CART ITEM COUNTER
                                 cartItemsCounter();
-                                
-                                // LOAD NEW SUBTOTAL PRICE
+                                // console.log(parseFloat(sumArray(prices)));
+                                // UPDATE THE TOTAL PRICE
                                 setTimeout(() => {
                                     total.innerHTML = "₱" + sumArray(prices).toFixed(2);
-                                    // if(total.innerText == "₱0.00") {
-                                    //     itemList.style.display = "none";
-                                    //     subtotal.style.display = "none";
-                                    //     emptyText.style.display = "block";
-                                    //     offcanvasFooter.style.display = "none";
-                                    //     itemCounterText.textContent = 0;
-                                    // }
-                                }, 2000)
+                                    // console.log(total.innerHTML);
+                                    // CHECK IF THERE'S AN ITEM IN CART
+                                    const itemCard = document.querySelector('.item-list .card');
+                                    if(!itemCard) {
+                                        itemList.style.display = "none";
+                                        subtotal.style.display = "none";
+                                        emptyText.style.display = "block";
+                                        offcanvasFooter.style.display = "none";
+                                        itemCounterText.textContent = 0;
+                                    }
+                                }, 2000);
                             });
                         });
 
                         // CART ITEM LIST COUNTER
                         function cartItemsCounter() {
                             const cartItemCounter = document.querySelectorAll('.cart-input-group .cart-input');
-                            const itemCounterText = document.getElementById("items-count");
+                            let itemCounterText = document.getElementById("items-count");
                             let cartCounter = 0;
                             
                             const itemList = document.querySelector('.item-list');
@@ -442,7 +410,7 @@ getContent().then(data => {
                             var button = decrementButton[i];
                             button.addEventListener('click', (event) => {
                                 var buttonClicked = event.target;
-                                console.log(buttonClicked);
+                                // console.log(buttonClicked);
                                 var input = buttonClicked.parentElement.children[1];
                                 // console.log(input);
                                 var inputValue = input.value;
@@ -1338,10 +1306,6 @@ getContent().then(details => {
                     const cartItem = document.createElement('div');
                     cartItem.classList.add("card");
                     cartItem.setAttribute("id", targetIDBtn);
-
-                    //* MAKE THE VALUE OF DATA-PRICE CORRECT BASED ON THE PRODUCT AMOUNT
-                    cartItem.setAttribute("data-price", 79.99);                    
-
                     cartItem.innerHTML = `
                         <img class="product-img" id="${details.products[targetIDBtn].id}" src="${details.products[targetIDBtn].img}" alt="${details.products[targetIDBtn].name}">
                         <div class="card-body">
@@ -1359,6 +1323,38 @@ getContent().then(details => {
 
                     // SHOW THE SIDEBAR/OFFCANVAS CART
                     $("#cartOffcanvas").offcanvas('show');
+
+                    // PUT DATA-PRICE ATTRIBUTE OF THE ITEM BASED ON THE PRODUCT AMOUNT
+                    if(targetIDBtn == 0) {
+                        cartItem.setAttribute("data-price", 79.99);
+                    }
+                    else if(targetIDBtn == 1) {
+                        cartItem.setAttribute("data-price", 45.99);
+                    }
+                    else if(targetIDBtn == 2) {
+                        cartItem.setAttribute("data-price", 24.99);
+                    }
+                    else if(targetIDBtn == 3) {
+                        cartItem.setAttribute("data-price", 49.99);
+                    }
+                    else if(targetIDBtn == 4) {
+                        cartItem.setAttribute("data-price", 29.99);
+                    }
+                    else if(targetIDBtn == 5) {
+                        cartItem.setAttribute("data-price", 74.99);
+                    }
+                    else if(targetIDBtn == 6) {
+                        cartItem.setAttribute("data-price", 49.99);
+                    }
+                    else if(targetIDBtn == 7) {
+                        cartItem.setAttribute("data-price", 25.99);
+                    }
+                    else if(targetIDBtn == 8) {
+                        cartItem.setAttribute("data-price", 24.99);
+                    }
+                    else {
+                        return addToCartBtn;
+                    }
                 }
                 catch {
                     return addToCartBtn;
@@ -1369,13 +1365,13 @@ getContent().then(details => {
                 const priceItems = document.querySelectorAll(".cart-product-amount");
                 const total = document.querySelector(".total-amount");
                 let prices = [];
-
+                
                 if(priceItems) {
                     priceItems.forEach(priceItem => {
                         let price = parseFloat(priceItem.innerText.replace("₱", ""));
                         prices.push(price);
                     });
-                    console.log(prices);
+                    // console.log(prices);
                 }
                 function sumArray(prices) {
                     let sum = 0;
@@ -1384,97 +1380,58 @@ getContent().then(details => {
                     }
                     return sum;
                 }
-                console.log(sumArray(prices));
-                total.innerHTML = "₱" + sumArray(prices).toFixed(2);                       
+                // console.log(sumArray(prices));
+                total.innerHTML = "₱" + sumArray(prices).toFixed(2);
 
-                // * (NEED TO FIX) IT CAN ONLY REMOVE THE LAST ELEMENT OF THE PRICES ARRAY
-                // Remove the element of an array if the removeItemBtn clicked
-                // function removeElementArray() {
-                //     const newPrices = (prices, item) => prices.filter(i => i !== item);
-                //     console.log(newPrices);
-                // }          
+                // * (NEED TO FIX THIS) COMPUTE THE SUBTOTAL IF THE QUANTITY INPUT NUMBER IS MORE THAN 2
+                // const cartInputValue = document.querySelectorAll(".cart-input");
+                // const priceItem = document.querySelector(".cart-product-amount");
+                // let totalQuantity = 0;
+                // let subtotal = 0;
 
-                // function minusArray(prices) {
-                //     let minus = 0;
-                //     for(let i = 0; i < prices.length; i++) {
-                //         minus -= prices[i];
-                //     }
-                //     return minus;
-                // }
-                // console.log(minusArray(prices));
-                // total.innerHTML = "₱" + minusArray(prices).toFixed(2);
-
-                // REMOVE ITEM ON THE CART AND UPDATE THE TOTAL PRICE
-                // function removeCartItems(prices) {
-                //     const removeBtns = document.querySelectorAll('.remove-btn');
-                //     removeBtns.forEach(removeItemBtn => {
-                //         removeItemBtn.addEventListener('click', () => {
-                //             const cardItem = removeItemBtn.parentElement;
-                //             let itemRemoved = cardItem.remove();
+                // cartInputValue.forEach(quantity => {
+                //     console.log(quantity.value);
                         
-                //             // REMOVE SPECIFIC ITEM FROM PRICES ARRAY
-                //             const removePrice = prices.filter(item => item !== itemRemoved);
-                //             console.log(removePrice);
-                        
-                //             // const newPrices = prices.reduce((acc, val) => acc + val, 0);
-                //             // priceItem();
+                //     let newQuantity = quantity.value;
+                //     console.log(newQuantity);
 
-                //             // GET THE PREVIOUS PRICES ARRAY AND MINUS THE NEW PRICE ARRAY TO GET THE NEW SUBTOTAL PRICE
-                //             let totalPrice = sumArray(prices) - parseFloat(removePrice);
-                //             // console.log(totalPrice.toFixed(2));
-                        
-                //             // LOAD NEW SUBTOTAL PRICE
-                //             setTimeout(() => {
-                //                 total.innerHTML = "₱" + totalPrice.toFixed(2);
-                //                 // if(total.innerText == "₱0.00") {
-                //                 //     itemList.style.display = "none";
-                //                 //     subtotal.style.display = "none";
-                //                 //     emptyText.style.display = "block";
-                //                 //     offcanvasFooter.style.display = "none";
-                //                 //     itemCounterText.textContent = 0;
-                //                 // }
-                //             }, 2000)
-                //         });
-                //     });
-                // }
-                // removeCartItems(prices);
+                //     totalQuantity = parseInt(totalQuantity) + parseInt(newQuantity);
+                //     console.log(totalQuantity);
+
+                //     subtotal = sumArray(prices) * parseInt(totalQuantity);
+                //     console.log("₱" + subtotal);
+                //     document.querySelector(".total-amount").innerHTML = "₱" + subtotal.toFixed(2);
+                // });                        
                 const removeBtns = document.querySelectorAll('.remove-btn');
                 removeBtns.forEach(removeItemBtn => {
-                removeItemBtn.addEventListener('click', () => {
-                    const cardItem = removeItemBtn.parentElement;
-                    console.log(cardItem);
-                    cardItem.remove();
-
-                    // let itemRemoved = cardItem.remove();
-                    // console.log(itemRemoved);
-
-                    // REMOVE SPECIFIC ITEM FROM PRICES ARRAY
-                    // const removeItemPrice = prices.filter(item => item !== cardItem);
-                    // console.log(removeItemPrice);
-
-                    const removePrice = parseFloat(cardItem.getAttribute('data-price'));
-                    console.log(removePrice);
-
-                    prices = prices.filter(item => item !== removePrice);
-                    console.log(prices);
-
-                    // UPDATE THE sumArray(prices)
-                    console.log(parseFloat(sumArray(prices)));
-
-                    cartItemsCounter();
-                    
-                    // LOAD NEW SUBTOTAL PRICE
-                    setTimeout(() => {
-                        total.innerHTML = "₱" + sumArray(prices).toFixed(2);
-                        // if(total.innerText == "₱0.00") {
-                        //     itemList.style.display = "none";
-                        //     subtotal.style.display = "none";
-                        //     emptyText.style.display = "block";
-                        //     offcanvasFooter.style.display = "none";
-                        //     itemCounterText.textContent = 0;
-                        // }
-                    }, 2000)
-                });
+                    removeItemBtn.addEventListener('click', () => {
+                        // REMOVE THE ITEM IN THE ITEM LIST WHEN THE REMOVE BTN CLICKED
+                        const cardItem = removeItemBtn.parentElement;
+                        // console.log(cardItem);
+                        cardItem.remove();
+                        // REMOVE SPECIFIC ITEM FROM PRICES ARRAY
+                        const removePrice = parseFloat(cardItem.getAttribute('data-price'));
+                        // console.log(removePrice);
+                        prices = prices.filter(item => item !== removePrice);
+                        // console.log(prices);
+                        // UPDATE THE CART ITEM COUNTER
+                        cartItemsCounter();
+                        // console.log(parseFloat(sumArray(prices)));
+                        // UPDATE THE TOTAL PRICE
+                        setTimeout(() => {
+                            total.innerHTML = "₱" + sumArray(prices).toFixed(2);
+                            // console.log(total.innerHTML);
+                            // CHECK IF THERE'S AN ITEM IN CART
+                            const itemCard = document.querySelector('.item-list .card');
+                            if(!itemCard) {
+                                itemList.style.display = "none";
+                                subtotal.style.display = "none";
+                                emptyText.style.display = "block";
+                                offcanvasFooter.style.display = "none";
+                                itemCounterText.textContent = 0;
+                            }
+                        }, 2000);
+                    });
                 });
 
                 // CART ITEM LIST COUNTER

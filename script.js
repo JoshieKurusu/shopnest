@@ -112,7 +112,7 @@ getContent().then(data => {
             let iW = window.innerWidth;
             if(iW <= 767) {
                 // * CHANGE THE http://127.0.0.1:5500/product.html TO ACTUAL LINK OF THE PRODUCT PAGE
-                window.location = "http://127.0.0.1:5500/product.html";
+                window.location = "https://joshiekurusu.github.io/shopnest/product.html";
             }
         });
     });
@@ -155,7 +155,7 @@ getContent().then(data => {
                                         <div class="dot"></div>
                                     </span>
                                 </button>
-                                <a href="http://127.0.0.1:5500/product.html">View More Details</a>
+                                <a href="https://joshiekurusu.github.io/shopnest/product.html">View More Details</a>
                             </div>
                         </div>
                     </div>
@@ -436,7 +436,7 @@ getContent().then(data => {
                             productImage.forEach(productImg => {
                                 productImg.addEventListener('click', () => {
                                     // * CHANGE THE http://127.0.0.1:5500/product.html TO ACTUAL LINK OF THE PRODUCT PAGE
-                                    window.location = "http://127.0.0.1:5500/product.html";
+                                    window.location = "https://joshiekurusu.github.io/shopnest/product.html";
                                 });
                             });
                         }

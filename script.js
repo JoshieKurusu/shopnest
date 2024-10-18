@@ -282,13 +282,16 @@ getContent().then(data => {
                         const total = document.querySelector(".total-amount");
                         let prices = [];
                         
-                        if(priceItems) {
-                            priceItems.forEach(priceItem => {
-                                let price = parseFloat(priceItem.innerText.replace("₱", ""));
-                                prices.push(price);
-                            });
-                            // console.log(prices);
+                        function productPrices() {
+                            if(priceItems) {
+                                priceItems.forEach(priceItem => {
+                                    let price = parseFloat(priceItem.innerText.replace("₱", ""));
+                                    prices.push(price);
+                                });
+                                // console.log(prices);
+                            }
                         }
+                        productPrices();
                         function sumArray(prices) {
                             let sum = 0;
                             for(let i = 0; i < prices.length; i++) {
@@ -318,37 +321,40 @@ getContent().then(data => {
                         //     console.log("₱" + subtotal);
                         //     document.querySelector(".total-amount").innerHTML = "₱" + subtotal.toFixed(2);
                         // });                        
-                        const removeBtns = document.querySelectorAll('.remove-btn');
-                        removeBtns.forEach(removeItemBtn => {
-                            removeItemBtn.addEventListener('click', () => {
-                                // REMOVE THE ITEM IN THE ITEM LIST WHEN THE REMOVE BTN CLICKED
-                                const cardItem = removeItemBtn.parentElement;
-                                // console.log(cardItem);
-                                cardItem.remove();
-                                // REMOVE SPECIFIC ITEM FROM PRICES ARRAY
-                                const removePrice = parseFloat(cardItem.getAttribute('data-price'));
-                                // console.log(removePrice);
-                                prices = prices.filter(item => item !== removePrice);
-                                // console.log(prices);
-                                //UPDATE THE CART ITEM COUNTER
-                                cartItemsCounter();
-                                // console.log(parseFloat(sumArray(prices)));
-                                // UPDATE THE TOTAL PRICE
-                                setTimeout(() => {
-                                    total.innerHTML = "₱" + sumArray(prices).toFixed(2);
-                                    // console.log(total.innerHTML);
-                                    // CHECK IF THERE'S AN ITEM IN CART
-                                    const itemCard = document.querySelector('.item-list .card');
-                                    if(!itemCard) {
-                                        itemList.style.display = "none";
-                                        subtotal.style.display = "none";
-                                        emptyText.style.display = "block";
-                                        offcanvasFooter.style.display = "none";
-                                        itemCounterText.textContent = 0;
-                                    }
-                                }, 2000);
+                        function removeItem() {
+                            const removeBtns = document.querySelectorAll('.remove-btn');
+                            removeBtns.forEach(removeItemBtn => {
+                                removeItemBtn.addEventListener('click', () => {
+                                    // REMOVE THE ITEM IN THE ITEM LIST WHEN THE REMOVE BTN CLICKED
+                                    const cardItem = removeItemBtn.parentElement;
+                                    // console.log(cardItem);
+                                    cardItem.remove();
+                                    // REMOVE SPECIFIC ITEM FROM PRICES ARRAY
+                                    const removePrice = parseFloat(cardItem.getAttribute('data-price'));
+                                    // console.log(removePrice);
+                                    prices = prices.filter(item => item !== removePrice);
+                                    console.log(prices);
+                                    // UPDATE THE CART ITEM COUNTER
+                                    cartItemsCounter();
+                                    // console.log(parseFloat(sumArray(prices)));
+                                    // UPDATE THE TOTAL PRICE
+                                    setTimeout(() => {
+                                        total.innerHTML = "₱" + sumArray(prices).toFixed(2);
+                                        // console.log(total.innerHTML);
+                                        // CHECK IF THERE'S AN ITEM IN CART
+                                        const itemCard = document.querySelector('.item-list .card');
+                                        if(!itemCard) {
+                                            itemList.style.display = "none";
+                                            subtotal.style.display = "none";
+                                            emptyText.style.display = "block";
+                                            offcanvasFooter.style.display = "none";
+                                            itemCounterText.textContent = 0;
+                                        }
+                                    }, 2000);
+                                });
                             });
-                        });
+                        }
+                        removeItem();
 
                         // CART ITEM LIST COUNTER
                         function cartItemsCounter() {
@@ -1322,7 +1328,9 @@ getContent().then(details => {
                     document.querySelector('.item-list').appendChild(cartItem);
 
                     // SHOW THE SIDEBAR/OFFCANVAS CART
-                    $("#cartOffcanvas").offcanvas('show');
+                    if(window.innerWidth >= 768) {
+                        $("#cartOffcanvas").offcanvas('show');
+                    }
 
                     // PUT DATA-PRICE ATTRIBUTE OF THE ITEM BASED ON THE PRODUCT AMOUNT
                     if(targetIDBtn == 0) {

@@ -498,7 +498,7 @@ if(wi >= 768) {
     });
 }
 else {
-    if(window.location == "http://127.0.0.1:5500/cart.html") {
+    if(window.location == "https://joshiekurusu.github.io/shopnest/cart.html") {
         cartBtn.setAttribute("disabled", "disabled");
     }
     else {
@@ -506,11 +506,11 @@ else {
     }
     cartBtn.addEventListener('click', () => {
         // * CHANGE THE http://127.0.0.1:5500/cart.html TO ACTUAL LINK OF THE CART PAGE
-        if(window.location == "http://127.0.0.1:5500/cart.html") {
+        if(window.location == "https://joshiekurusu.github.io/shopnest/cart.html") {
             location.reload();
         }
         else {
-            window.location = "http://127.0.0.1:5500/cart.html";
+            window.location = "https://joshiekurusu.github.io/shopnest/cart.html";
         }
     });
     try {
@@ -527,7 +527,7 @@ function myFunction() {
     if(wo >= 768) {
          // HIDE THE FILTER & SORT OFFCANVAS WHEN THE BROWSER WIDTH IS ABOVE 768PX
         $("#filterSortOffcanvas").offcanvas('hide');
-        if(window.location == "http://127.0.0.1:5500/cart.html") {
+        if(window.location == "https://joshiekurusu.github.io/shopnest/cart.html") {
             cartBtn.setAttribute("disabled", "disabled");
         }
         else {
@@ -545,7 +545,7 @@ function myFunction() {
         }
     }
     else {
-        if(window.location == "http://127.0.0.1:5500/cart.html") {
+        if(window.location == "https://joshiekurusu.github.io/shopnest/cart.html") {
             cartBtn.setAttribute("disabled", "disabled");
         }
         else {
@@ -553,11 +553,11 @@ function myFunction() {
         }
         cartBtn.addEventListener('click', () => {
             // * CHANGE THE http://127.0.0.1:5500/cart.html TO ACTUAL LINK OF THE CART PAGE
-            if(window.location == "http://127.0.0.1:5500/cart.html") {
+            if(window.location == "https://joshiekurusu.github.io/shopnest/cart.html") {
                 location.reload();
             }
             else {
-                window.location = "http://127.0.0.1:5500/cart.html";
+                window.location = "https://joshiekurusu.github.io/shopnest/cart.html";
             }
         });
         // HIDE THE CART SIDEBAR/OFFCANVAS AND THE PRODUCT MODAL WHEN THE BROWSER WIDTH IS BELOW 768PX

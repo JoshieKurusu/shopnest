@@ -5,14 +5,14 @@ class Header extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
             <header>
-                <!-- Navigation bar -->
+                <!-- NAVIGATION BAR -->
                 <nav class="navbar navbar-expand-md">
                     <div class="container-fluid">
-                        <!-- Brand -->
+                        <!-- BRAND LOGO -->
                         <a href="./index.html"><img src="./img/logo-1.png" alt="ShopNest"></a>
                         <!-- Collapsible wrapper -->
                         <div class="collapse navbar-collapse" id="navbarContent">
-                            <!-- Links -->
+                            <!-- LINKS -->
                             <ul class="navbar-nav">
                                 <li class="nav-item"><a href="./index.html" class="nav-link active">Home</a></li>
                                 <li class="nav-item"><a href="./policies.html" class="nav-link">Store Policies</a></li>
@@ -21,7 +21,7 @@ class Header extends HTMLElement {
                             </ul>
                         </div>
                         
-                        <!-- Shopping Cart Icon -->
+                        <!-- SHOPPING CART ICON -->
                         <button type="button" class="cart" id="cart-btn" data-hook="svg-icon-wrapper" data-bs-target="#cartOffcanvas" data-bs-toggle="offcanvas" aria-controls="cartOffcanvas">
                             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" viewBox="5.7 0 105.5 126.1" preserveAspectRatio="xMinYMax meet" data-hook="svg-icon-1">
                                 <path fill="#E71D1D" d="M99.8 28.4c0-1.2-0.9-2-2.1-2h-15c0 3.2 0 7.6 0 8.2 0 1.5-1.2 2.6-2.6 2.9 -1.5 0.3-2.9-0.9-3.2-2.3 0-0.3 0-0.3 0-0.6 0-0.9 0-4.7 0-8.2H40.1c0 3.2 0 7.3 0 8.2 0 1.5-1.2 2.9-2.6 2.9 -1.5 0-2.9-0.9-3.2-2.3 0-0.3 0-0.3 0-0.6 0-0.6 0-5 0-8.2h-15c-1.2 0-2 0.9-2 2L8.3 124c0 1.2 0.9 2.1 2.1 2.1h96.3c1.2 0 2.1-0.9 2.1-2.1L99.8 28.4z"></path>
@@ -30,14 +30,14 @@ class Header extends HTMLElement {
                             </svg>
                         </button>
 
-                        <!-- Toggle button -->
+                        <!-- MOBILE MENU BUTTON -->
                         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
                             <span class="toggler-icon top-bar"></span>
                             <span class="toggler-icon middle-bar"></span>
                             <span class="toggler-icon bottom-bar"></span>
                         </button>
                         
-                        <!-- Search form -->
+                        <!-- SEARCH FORM -->
                         <div class="input-group">
                             <button type="button" class="btn" data-mdb-ripple-init>
                                 <i class="fa fa-search"></i>
@@ -48,7 +48,7 @@ class Header extends HTMLElement {
                         </div>
                     </div>
                 </nav>
-                <!-- Offcanvas Shopping Cart -->
+                <!-- OFFCANVAS/SIDEBAR SHOPPING CART -->
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
                     <div class="offcanvas-header">
                         <div class="column">
@@ -487,7 +487,7 @@ const offcanvas = document.getElementById('cartOffcanvas');
 // GET THE STATIC WIDTH OF THE BROWSER
 let wi = window.innerWidth;
 if(wi >= 768) {
-    if(window.location == "http://127.0.0.1:5500/cart.html") {
+    if(window.location == "https://joshiekurusu.github.io/shopnest/cart.html") {
         cartBtn.setAttribute("disabled", "disabled");
     }
     else {

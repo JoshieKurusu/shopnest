@@ -20,20 +20,20 @@ async function getContent() {
 getContent().then(data => {
     // MAKE A CAROUSEL OF PRODUCT CARDS FROM THE PRODUCTS ARRAY ON THE JSON FILE
     function carouselCard() {
-        let carouselOutput = '';
-        data.products.forEach(product => {
-            carouselOutput += `
-                <div class="carousel-item card ${product.category}" id="${product.id}">
-                    <img src="./${product.img}" alt="${product.name}" width="240" height="240">
-                    <div class="card-body">
-                        <button type="button" class="btn quick-view-btn" id="${product.id}" data-bs-toggle="modal" data-bs-target="#product-modal">Quick View</button>
-                        <h5 class="card-title">${product.name}</h5>
-                        <h5 class="card-text">₱${product.amount}</h5>
-                    </div>
-                </div>
-            `;
-        });
         try {
+            let carouselOutput = '';
+            data.products.forEach(product => {
+                carouselOutput += `
+                    <div class="carousel-item card ${product.category}" id="${product.id}">
+                        <img src="./${product.img}" alt="${product.name}" width="240" height="240">
+                        <div class="card-body">
+                            <button type="button" class="btn quick-view-btn" id="${product.id}" data-bs-toggle="modal" data-bs-target="#product-modal">Quick View</button>
+                            <h5 class="card-title">${product.name}</h5>
+                            <h5 class="card-text">₱${product.amount}</h5>
+                        </div>
+                    </div>
+                `;
+            });
             document.getElementById('carousel').innerHTML = carouselOutput;
         }
         catch(err) {
@@ -458,80 +458,80 @@ getContent().then(information => {
     // MAKE A HTML DOM FOR THE BLOG POST IN BLOG PAGE FROM THE POSTS ARRAY ON THE JSON FILE
     const blogPost = document.getElementById('blog-post');
     function blogPostList() {
-        let postList = '';
-        information.posts.forEach(post => {
-            postList += `
-                <article class="post-list-item" id="${post.postId}">
-                    <img id="${post.postId}" class="blog-post-img" src="./${post.postImg}" alt="${post.postTitle}">
-                    <div class="post-list-description">
-                        <div class="post-header">
-                            <div class="column-1">
-                                <img src="./${post.writersImg}" alt="${post.writersName}">
-                                <div class="post-details">
-                                    <div class="row-1">
-                                        <h6 class="username">${post.writersName}</h6>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" viewBox="0 0 19 19" style="fill-rule: evenodd;">
-                                            <path d="M15.3812,6.495914 L12.6789333,8.77258837 C12.6191333,8.84477644 12.5099333,8.85722265 12.4354,8.79997005 C12.4215333,8.79001308 12.4094,8.77756686 12.3998667,8.76429089 L9.78686667,6.14327115 C9.67766667,5.99225704 9.46186667,5.95491839 9.305,6.05863687 C9.26946667,6.08186981 9.23913333,6.11091099 9.21573333,6.14493065 L6.60013333,8.81075677 C6.5464,8.88626383 6.43893333,8.90534803 6.3592,8.85390366 C6.34446667,8.84394669 6.33146667,8.83233022 6.32106667,8.81905425 L3.61966667,6.50587098 C3.5018,6.36149485 3.28426667,6.33577266 3.13346667,6.44861837 C3.0494,6.51167921 3,6.60792997 3,6.70998895 L4,14 L15,14 L16,6.70169148 C16,6.51831719 15.8448667,6.36979232 15.6533333,6.36979232 C15.5476,6.36979232 15.4470667,6.41625821 15.3812,6.495914 Z"></path>
-                                        </svg>
-                                    </div>
-                                    <div class="row-2">
-                                        <h6 class="date">${post.postDate}</h6>
-                                        <i class="fa fa-circle"></i>
-                                        <h6 class="read-time">${post.postTime}</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="column-2">
-                                <div class="dropstart">
-                                    <button type="button" class="fa fa-ellipsis-v" data-bs-toggle="dropdown" aria-expanded="false"></button>
-                                    <!-- Dropdown Menu -->
-                                    <ul class="dropdown-menu">
-                                        <li><button type="button" class="btn"><i class="fa fa-pencil-square-o"></i>Edit Post</button></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><button type="button" class="btn"><i class="fa fa-share-square-o"></i>Share Post</button></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><button type="button" class="btn"><i class="fa fa-bookmark-o"></i>Pin to Feed</button></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><button type="button" class="btn"><i class="fa fa-comment-o"></i>Turn Off Commenting</button></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><button type="button" class="btn"><i class="fa fa-trash-o"></i>Move to Trash</button></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-description">
-                            <h4 class="post-title" id="${post.postId}">${post.postTitle}</h4>
-                            <p class="post-paragraph" id="${post.postId}">${post.postParagraph}</p>
-                        </div>
-                        <hr class="solid top">
-                        <div class="post-footer">
-                            <div class="column-1">
-                                <div class="view-count-compact">
-                                    <i class="fa fa-eye"></i>
-                                    <p class="viewers-counter">${post.views}</p>
-                                    <p class="text">views</p>
-                                </div>
-                                <div class="comment-count-compact">
-                                    <button type="button" class="btn">
-                                        <i class="fa fa-comment-o"></i>
-                                        <span class="comments-counter">${post.comments}</span>
-                                        <span class="text">comments</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="column-2">
-                                <div class="like-count-compact">
-                                    <p class="likes-counter">${post.likes}</p>
-                                    <button type="button" class="btn like-btn fa fa-heart-o"></button>
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="solid bottom">
-                    </div>
-                </article>
-            `;
-        });
         try {
+            let postList = '';
+            information.posts.forEach(post => {
+                postList += `
+                    <article class="post-list-item" id="${post.postId}">
+                        <img id="${post.postId}" class="blog-post-img" src="./${post.postImg}" alt="${post.postTitle}">
+                        <div class="post-list-description">
+                            <div class="post-header">
+                                <div class="column-1">
+                                    <img src="./${post.writersImg}" alt="${post.writersName}">
+                                    <div class="post-details">
+                                        <div class="row-1">
+                                            <h6 class="username">${post.writersName}</h6>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="19" viewBox="0 0 19 19" style="fill-rule: evenodd;">
+                                                <path d="M15.3812,6.495914 L12.6789333,8.77258837 C12.6191333,8.84477644 12.5099333,8.85722265 12.4354,8.79997005 C12.4215333,8.79001308 12.4094,8.77756686 12.3998667,8.76429089 L9.78686667,6.14327115 C9.67766667,5.99225704 9.46186667,5.95491839 9.305,6.05863687 C9.26946667,6.08186981 9.23913333,6.11091099 9.21573333,6.14493065 L6.60013333,8.81075677 C6.5464,8.88626383 6.43893333,8.90534803 6.3592,8.85390366 C6.34446667,8.84394669 6.33146667,8.83233022 6.32106667,8.81905425 L3.61966667,6.50587098 C3.5018,6.36149485 3.28426667,6.33577266 3.13346667,6.44861837 C3.0494,6.51167921 3,6.60792997 3,6.70998895 L4,14 L15,14 L16,6.70169148 C16,6.51831719 15.8448667,6.36979232 15.6533333,6.36979232 C15.5476,6.36979232 15.4470667,6.41625821 15.3812,6.495914 Z"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="row-2">
+                                            <h6 class="date">${post.postDate}</h6>
+                                            <i class="fa fa-circle"></i>
+                                            <h6 class="read-time">${post.postTime}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column-2">
+                                    <div class="dropstart">
+                                        <button type="button" class="fa fa-ellipsis-v" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                        <!-- Dropdown Menu -->
+                                        <ul class="dropdown-menu">
+                                            <li><button type="button" class="btn"><i class="fa fa-pencil-square-o"></i>Edit Post</button></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><button type="button" class="btn"><i class="fa fa-share-square-o"></i>Share Post</button></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><button type="button" class="btn"><i class="fa fa-bookmark-o"></i>Pin to Feed</button></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><button type="button" class="btn"><i class="fa fa-comment-o"></i>Turn Off Commenting</button></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><button type="button" class="btn"><i class="fa fa-trash-o"></i>Move to Trash</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post-description">
+                                <h4 class="post-title" id="${post.postId}">${post.postTitle}</h4>
+                                <p class="post-paragraph" id="${post.postId}">${post.postParagraph}</p>
+                            </div>
+                            <hr class="solid top">
+                            <div class="post-footer">
+                                <div class="column-1">
+                                    <div class="view-count-compact">
+                                        <i class="fa fa-eye"></i>
+                                        <p class="viewers-counter">${post.views}</p>
+                                        <p class="text">views</p>
+                                    </div>
+                                    <div class="comment-count-compact">
+                                        <button type="button" class="btn">
+                                            <i class="fa fa-comment-o"></i>
+                                            <span class="comments-counter">${post.comments}</span>
+                                            <span class="text">comments</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="column-2">
+                                    <div class="like-count-compact">
+                                        <p class="likes-counter">${post.likes}</p>
+                                        <button type="button" class="btn like-btn fa fa-heart-o"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="solid bottom">
+                        </div>
+                    </article>
+                `;
+            });
             blogPost.innerHTML = postList;
         }
         catch(err) {
@@ -831,19 +831,19 @@ getContent().then(items => {
     // MAKE A HTML DOM OF THE PRODUCT CARDS IN THE CATEGORY PAGE
     const productList = document.querySelector('.product-list');
     function productLists() {
-        let categoryProductList = '';
-        items.products.forEach(product => {
-            categoryProductList += `
-                <div class="card ${product.category}" id="${product.id}">
-                    <img src="${product.img}" alt="${product.name}">
-                    <div class="card-body">
-                        <h6 class="product-name">${product.name}</h6>
-                        <h6 class="product-amount">₱${product.amount}</h6>                
-                    </div>
-                </div>
-            `;
-        });
         try {
+            let categoryProductList = '';
+            items.products.forEach(product => {
+                categoryProductList += `
+                    <div class="card ${product.category}" id="${product.id}">
+                        <img src="${product.img}" alt="${product.name}">
+                        <div class="card-body">
+                            <h6 class="product-name">${product.name}</h6>
+                            <h6 class="product-amount">₱${product.amount}</h6>                
+                        </div>
+                    </div>
+                `;
+            });
             productList.innerHTML = categoryProductList;
         }
         catch(err) {
@@ -1050,41 +1050,74 @@ getContent().then(items => {
     const maximumValue = document.querySelectorAll(".max-price-value");
     const sliderFill = document.querySelectorAll(".slider-fill");
     const inputRange = document.querySelectorAll("input[type=range]");
-    
     inputRange.forEach(range => range.addEventListener('input', validateRange));
-
     // VALIDATE RANGE AND UPDATE THE FILL COLOR OF THE SLIDER-FILL
     function validateRange() {
-        // * MAKE THE MINIMUM PRICE AND MAXIMUM PRICE WORKING ON THE HIGHER WIDTH
-        let minimumPrice = parseFloat(inputRange[0, 2].value);
-        let maximumPrice = parseFloat(inputRange[1, 3].value);
+        // CHECK IF THE BROWSER WIDTH IS SMALLER OR BIGGER TO 768PX
+        if(window.innerWidth >= 768) {
+            // MINIMUM PRICE AND MAXIMUM PRICE OF 768PX HIGHER
+            let minimumPrice = parseFloat(inputRange[0].value);
+            let maximumPrice = parseFloat(inputRange[1].value);
 
-        // SWAP THE VALUES IF minimumPrice IS GREATER THAN maximumPrice
-        if (minimumPrice > maximumPrice) {
-            let tempValue = maximumPrice;
-            maximumPrice = minimumPrice;
-            minimumPrice = tempValue;
+            // SWAP THE VALUES IF minimumPrice IS GREATER THAN maximumPrice
+            if (minimumPrice > maximumPrice) {
+                let tempValue = maximumPrice;
+                maximumPrice = minimumPrice;
+                minimumPrice = tempValue;
+            }
+            // CALCULATE THE PERCENTAGE POSITION FOR THE MIN AND MAX VALUES
+            const minPercentage = ((minimumPrice - 24.99) / 55) * 100;
+            const maxPercentage = ((maximumPrice - 24.99) / 55) * 100;
+            // SET THE POSITION AND WIDTH OF THE FILL COLOR ELEMENT TO REPRESENT THE SELECTED RANGE
+            sliderFill.forEach(slider => {
+                slider.style.left = minPercentage + "%";
+                slider.style.width = maxPercentage - minPercentage + "%";
+            });
+            // UPDATE THE DISPLAYED MIN AND MAX VALUES
+            minimumValue.forEach(minValue => {
+                minValue.innerText = "₱" + minimumPrice;
+            });
+            maximumValue.forEach(maxValue => {
+                maxValue.innerText = "₱" + maximumPrice;
+            });
         }
+        else {
+            // MINIMUM PRICE AND MAXIMUM PRICE OF 767PX LOWER
+            let minimumPrice = parseFloat(inputRange[2].value);
+            let maximumPrice = parseFloat(inputRange[3].value);
 
-        // CALCULATE THE PERCENTAGE POSITION FOR THE MIN AND MAX VALUES
-        const minPercentage = ((minimumPrice - 24.99) / 55) * 100;
-        const maxPercentage = ((maximumPrice - 24.99) / 55) * 100;
-
-        // SET THE POSITION AND WIDTH OF THE FILL COLOR ELEMENT TO REPRESENT THE SELECTED RANGE
-        sliderFill.forEach(slider => {
-            slider.style.left = minPercentage + "%";
-            slider.style.width = maxPercentage - minPercentage + "%";
-        });
-
-        // UPDATE THE DISPLAYED MIN AND MAX VALUES
-        minimumValue.forEach(minValue => {
-            minValue.innerText = "₱" + minimumPrice;
-        });
-        maximumValue.forEach(maxValue => {
-            maxValue.innerText = "₱" + maximumPrice;
-        });
+            // SWAP THE VALUES IF minimumPrice IS GREATER THAN maximumPrice
+            if (minimumPrice > maximumPrice) {
+                let tempValue = maximumPrice;
+                maximumPrice = minimumPrice;
+                minimumPrice = tempValue;
+            }
+            // CALCULATE THE PERCENTAGE POSITION FOR THE MIN AND MAX VALUES
+            const minPercentage = ((minimumPrice - 24.99) / 55) * 100;
+            const maxPercentage = ((maximumPrice - 24.99) / 55) * 100;
+            // SET THE POSITION AND WIDTH OF THE FILL COLOR ELEMENT TO REPRESENT THE SELECTED RANGE
+            sliderFill.forEach(slider => {
+                slider.style.left = minPercentage + "%";
+                slider.style.width = maxPercentage - minPercentage + "%";
+            });
+            // UPDATE THE DISPLAYED MIN AND MAX VALUES
+            minimumValue.forEach(minValue => {
+                minValue.innerText = "₱" + minimumPrice;
+            });
+            maximumValue.forEach(maxValue => {
+                maxValue.innerText = "₱" + maximumPrice;
+            });
+        }
     }
     validateRange();
+
+    // REDIRECT TO PRODUCT PAGE WHEN THE IMAGE CLICKED
+    const categoryProductImage = document.querySelectorAll('.product-list .card img');
+    categoryProductImage.forEach(categoryProductImg => {
+        categoryProductImg.addEventListener('click', () => {
+            window.location = 'https://joshiekurusu.github.io/shopnest/product.html';
+        });
+    });
 });
 // RENDER THE PRODUCTS DETAILS IN THE PRODUCT PAGE
 getContent().then(details => {
@@ -1093,45 +1126,45 @@ getContent().then(details => {
     function productDetails() {
         let itemDetail = '';
         details.products.forEach(detail => {
-            itemDetail += `
-                <div class="product-item">
-                    <img src="${detail.img}" alt="${detail.name}" width="240" height="229">
-                    <div class="product-text">
-                        <h4 class="product-name">${detail.name}</h4>
-                        <h4 class="product-amount">₱${detail.amount}</h4>
-                    </div>
-                    <div class="product-qty">
-                        <p>Quantity:</p>
-                        <div class="input-group">
-                            <input type="number" id="input-qty" aria-label="Quantity" max="99999" min="1" value="1">
-                            <div class="up-down-btns">
-                                <button type="button" class="btn fa fa-angle-up increment"></button>
-                                <button type="button" class="btn fa fa-angle-down decrement"></button>
+            try {
+                itemDetail += `
+                    <div class="product-item">
+                        <img src="${detail.img}" alt="${detail.name}" width="240" height="229">
+                        <div class="product-text">
+                            <h4 class="product-name">${detail.name}</h4>
+                            <h4 class="product-amount">₱${detail.amount}</h4>
+                        </div>
+                        <div class="product-qty">
+                            <p>Quantity:</p>
+                            <div class="input-group">
+                                <input type="number" id="input-qty" aria-label="Quantity" max="99999" min="1" value="1">
+                                <div class="up-down-btns">
+                                    <button type="button" class="btn fa fa-angle-up increment"></button>
+                                    <button type="button" class="btn fa fa-angle-down decrement"></button>
+                                </div>
                             </div>
                         </div>
+                        <div class="add-to-cart">
+                            <button type="button" class="btn addToCartBtn" id="${detail.id}">
+                                <span class="text">Add to Cart</span>
+                                <span class="falling-dots">
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                </span>
+                            </button>
+                        </div>
+                        <p class="product-definition">${detail.description}</p>
+                        <div class="social-bar">
+                            <ul>
+                                <li><a href="#" class="fa fa-whatsapp"></a></li>
+                                <li><a href="#" class="fa fa-facebook"></a></li>
+                                <li><a href="#" class="fa fa-twitter"></a></li>
+                                <li><a href="#" class="fa fa-pinterest"></a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="add-to-cart">
-                        <button type="button" class="btn addToCartBtn" id="${detail.id}">
-                            <span class="text">Add to Cart</span>
-                            <span class="falling-dots">
-                                <div class="dot"></div>
-                                <div class="dot"></div>
-                                <div class="dot"></div>
-                            </span>
-                        </button>
-                    </div>
-                    <p class="product-definition">${detail.description}</p>
-                    <div class="social-bar">
-                        <ul>
-                            <li><a href="#" class="fa fa-whatsapp"></a></li>
-                            <li><a href="#" class="fa fa-facebook"></a></li>
-                            <li><a href="#" class="fa fa-twitter"></a></li>
-                            <li><a href="#" class="fa fa-pinterest"></a></li>
-                        </ul>
-                    </div>
-                </div>
-            `;
-            try {
+                `;
                 productDetail.innerHTML = itemDetail;
             }
             catch(err) {

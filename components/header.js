@@ -14,10 +14,10 @@ class Header extends HTMLElement {
                         <div class="collapse navbar-collapse" id="navbarContent">
                             <!-- LINKS -->
                             <ul class="navbar-nav">
-                                <li class="nav-item"><a href="./index.html" class="nav-link active">Home</a></li>
-                                <li class="nav-item"><a href="./policies.html" class="nav-link">Store Policies</a></li>
-                                <li class="nav-item"><a href="./category.html" class="nav-link">Shop</a></li>
-                                <li class="nav-item"><a href="./blog.html" class="nav-link">Blog</a></li>
+                                <li class="nav-item"><a id="1" href="./index.html" class="nav-link">Home</a></li>
+                                <li class="nav-item"><a id="2" href="./policies.html" class="nav-link">Store Policies</a></li>
+                                <li class="nav-item"><a id="3" href="./category.html" class="nav-link">Shop</a></li>
+                                <li class="nav-item"><a id="4" href="./blog.html" class="nav-link">Blog</a></li>
                             </ul>
                         </div>
                         
@@ -573,34 +573,15 @@ function myFunction() {
     }
 }
 
-// * (NEED TO FIX) PUT ACTIVE CLASS ON A ACTIVE NAV-LINK
-// ADD ACTIVE CLASS IN NAVIGATION BAR LINKS TO THE CURRENT/CLICKED BUTTON
-var btnContainer = document.querySelector(".navbar-nav");
-// GET ALL BUTTONS WITH class="btn" INSIDE THE CONTAINER
-var btn = btnContainer.querySelectorAll(".nav-link");
-// LOOP THROUGH THE BUTTONS AND ADD THE ACTIVE CLASS TO THE CURRENT/CLICKED BUTTON
-for (var i = 0; i < btn.length; i++) {
-  btn[i].addEventListener("click", function() {
-    var current = document.getElementsByClassName("active");
-    // IF THERE'S NO ACTIVE CLASS
-    if (current.length > 0) {
-      current[0].className = current[0].className.replace(" active", "");
-    }
-    // ADD THE ACTIVE CLASS TO THE CURRENT/CLICKED BUTTON
-    this.className += " active";
-  });
-}
-
 // CART ITEM LIST COUNTER
 const cartItemCounter = document.querySelectorAll('.cart-input-group .cart-input');
 const itemCounterText = document.getElementById("items-count");
 let cartCounter = 0;
-
+// CART CONTENT ELEMENTS
 const itemList = document.querySelector('.item-list');
 const subtotal = document.querySelector('.total');
 const emptyText = document.querySelector('.empty-cart');
 const offcanvasFooter = document.querySelector('.offcanvas-footer');
-
 cartItemCounter.forEach(itemCounter => {
     let counterValue = parseInt(itemCounter.value);
     let totalCountValue = cartCounter + counterValue;
@@ -621,3 +602,45 @@ cartItemCounter.forEach(itemCounter => {
         offcanvasFooter.style.display = 'flex';
     }
 });
+
+const navigationLink = document.querySelectorAll('.nav-link');
+navigationLink.forEach(navLinks => {
+    navLinks.addEventListener('click', (event) => {
+        // GET THE ID OF THE BUTTON LINK
+        let linkIdBtn = event.target.id;
+        // console.log(linkIdBtn);
+        // REMOVE THE ACTIVE CLASS ON THE PREVIOUS BUTTON
+        navigationLink.forEach(navLink => navLink.classList.remove('active'));
+        if(linkIdBtn == 1) {
+            navLinks.classList.add('active');
+        }
+        else if(linkIdBtn == 2) {
+            navLinks.classList.add('active');
+        }
+        else if(linkIdBtn == 3) {
+            navLinks.classList.add('active');
+        }
+        else if(linkIdBtn == 4) {
+            navLinks.classList.add('active');
+        }
+        else {
+            return navigationLink;
+        }
+    });
+});
+// ADD ACTIVE CLASS IN NAVIGATION LINK BASED ON THE SHOPNEST PAGE
+if(window.location == 'https://joshiekurusu.github.io/shopnest/index.html' || window.location == 'http://127.0.0.1:5500/index.html') {
+    document.getElementById('1').classList.add('active');
+}
+else if(window.location == 'https://joshiekurusu.github.io/shopnest/policies.html' || window.location == 'http://127.0.0.1:5500/policies.html') {
+    document.getElementById('2').classList.add('active');
+}
+else if(window.location == 'https://joshiekurusu.github.io/shopnest/category.html' || window.location == 'http://127.0.0.1:5500/category.html') {
+    document.getElementById('3').classList.add('active');
+}
+else if(window.location == 'https://joshiekurusu.github.io/shopnest/blog.html' || window.location == 'http://127.0.0.1:5500/blog.html') {
+    document.getElementById('4').classList.add('active');
+}
+else {
+    navigationLink.forEach(navLink => navLink.classList.remove('active'));
+}

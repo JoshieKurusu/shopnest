@@ -629,7 +629,7 @@ navigationLink.forEach(navLinks => {
     });
 });
 // ADD ACTIVE CLASS IN NAVIGATION LINK BASED ON THE SHOPNEST PAGE
-if(window.location == 'https://joshiekurusu.github.io/shopnest/index.html' || window.location == 'http://127.0.0.1:5500/index.html') {
+if(window.location == 'https://joshiekurusu.github.io/shopnest/' || window.location == 'https://joshiekurusu.github.io/shopnest/index.html' || window.location == 'http://127.0.0.1:5500/index.html') {
     document.getElementById('1').classList.add('active');
 }
 else if(window.location == 'https://joshiekurusu.github.io/shopnest/policies.html' || window.location == 'http://127.0.0.1:5500/policies.html') {

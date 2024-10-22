@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopNest</title>
+    <link rel="icon" href="./img/icons/shopnest-icon.webp">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="components/header.js" type="text/javascript" defer></script>
+    <script src="components/footer.js" type="text/javascript" defer></script>
+</head>
+<body onresize="myFunction()">
+    <!-- REUSEABLE HEADER -->
+    <header-component></header-component>
+    <!-- CART PAGE CONTENT -->
+    <main class="d-flex flex-column">
+        <!-- CART SECTION -->
+        <section class="cart-section">
+            <!-- CART CONTENT WHEN THERES ORDER/S  -->
+            <div class="container-fluid d-none">
+                <!-- CHECKOUT BUTTON FOR MOBILE AND TABLET -->
+                <div class="top-view" data-hook="CheckoutButtons.topView">
+                    <button type="button" tabindex="0" class="btn" aria-live="assertive" aria-disabled="false" data-hook="CheckoutButtonDataHook.button">
+                        <span>Checkout</span>
+                    </button>
+                </div>
+                <!-- CART HEADER -->
+                <div class="cart-header">
+                    <h2>My cart</h2>
+                </div>
+                <!-- CART ITEMS -->
+                <div class="cart-container">
+                    <!-- <ul class="cart-items-container">
+                        <li class="cart-items">
+                            <div class="card">
+                                <img src="./img/products/leather-handbag.webp" alt="EcoChic Vegan Leather Handbag">
+                                <div class="card-body">
+                                    <div class="cart-product-text">
+                                        <h6 class="cart-product-name">EcoChic Vegan Leather Handbag</h6>
+                                        <h6 class="cart-product-amount">₱79.99</h6>
+                                    </div>
+                                    <div class="input-group cart-input-group" id="">
+                                        <button type="button" class="btn fa fa-minus signs" id="minus"></button> 
+                                        <input type="number" class="cart-input" id="" aria-label="Quantity" max="99999" min="1" value="1">
+                                        <button type="button" class="btn fa fa-plus signs" id="plus"></button>
+                                    </div>
+                                    <h6 class="cart-total-amount">₱79.99</h6>
+                                </div>
+                                <button type="button" class="btn">
+                                    <svg viewBox="0 0 24 24" fill="#000000" width="24" height="24">
+                                        <path fill-rule="evenodd" d="M13.5,3 C14.327,3 15,3.673 15,4.5 L15,4.5 L15,5 L19,5 L19,6 L18,6 L18,17.5 C18,18.879 16.878,20 15.5,20 L15.5,20 L7.5,20 C6.122,20 5,18.879 5,17.5 L5,17.5 L5,6 L4,6 L4,5 L8,5 L8,4.5 C8,3.673 8.673,3 9.5,3 L9.5,3 Z M17,6 L6,6 L6,17.5 C6,18.327 6.673,19 7.5,19 L7.5,19 L15.5,19 C16.327,19 17,18.327 17,17.5 L17,17.5 L17,6 Z M10,9 L10,16 L9,16 L9,9 L10,9 Z M14,9 L14,16 L13,16 L13,9 L14,9 Z M13.5,4 L9.5,4 C9.224,4 9,4.225 9,4.5 L9,4.5 L9,5 L14,5 L14,4.5 C14,4.225 13.776,4 13.5,4 L13.5,4 Z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </li>
+                        <li class="cart-items">
+                            <div class="card">
+                                <img src="./img/products/bamboo-shades.webp" alt="Bamboo Shades">
+                                <div class="card-body">
+                                    <div class="cart-product-text">
+                                        <h6 class="cart-product-name">Bamboo Shades</h6>
+                                        <h6 class="cart-product-amount">₱45.99</h6>
+                                    </div>
+                                    <div class="input-group cart-input-group" id="">
+                                        <button type="button" class="btn fa fa-minus signs" id="minus"></button> 
+                                        <input type="number" class="cart-input" id="" aria-label="Quantity" max="99999" min="1" value="1">
+                                        <button type="button" class="btn fa fa-plus signs" id="plus"></button>
+                                    </div>
+                                    <h6 class="cart-total-amount">₱45.99</h6>
+                                </div>
+                                <button type="button" class="btn">
+                                    <svg viewBox="0 0 24 24" fill="#000000" width="24" height="24">
+                                        <path fill-rule="evenodd" d="M13.5,3 C14.327,3 15,3.673 15,4.5 L15,4.5 L15,5 L19,5 L19,6 L18,6 L18,17.5 C18,18.879 16.878,20 15.5,20 L15.5,20 L7.5,20 C6.122,20 5,18.879 5,17.5 L5,17.5 L5,6 L4,6 L4,5 L8,5 L8,4.5 C8,3.673 8.673,3 9.5,3 L9.5,3 Z M17,6 L6,6 L6,17.5 C6,18.327 6.673,19 7.5,19 L7.5,19 L15.5,19 C16.327,19 17,18.327 17,17.5 L17,17.5 L17,6 Z M10,9 L10,16 L9,16 L9,9 L10,9 Z M14,9 L14,16 L13,16 L13,9 L14,9 Z M13.5,4 L9.5,4 C9.224,4 9,4.225 9,4.5 L9,4.5 L9,5 L14,5 L14,4.5 C14,4.225 13.776,4 13.5,4 L13.5,4 Z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </li>
+                        <li class="cart-items">
+                            <div class="card">
+                                <img src="./img/products/cotton-tee..webp" alt="Organic Cotton Tee">
+                                <div class="card-body">
+                                    <div class="cart-product-text">
+                                        <h6 class="cart-product-name">Organic Cotton Tee</h6>
+                                        <h6 class="cart-product-amount">₱24.99</h6>
+                                    </div>
+                                    <div class="input-group cart-input-group" id="">
+                                        <button type="button" class="btn fa fa-minus signs" id="minus"></button> 
+                                        <input type="number" class="cart-input" id="" aria-label="Quantity" max="99999" min="1" value="1">
+                                        <button type="button" class="btn fa fa-plus signs" id="plus"></button>
+                                    </div>
+                                    <h6 class="cart-total-amount">₱24.99</h6>
+                                </div>
+                                <button type="button" class="btn">
+                                    <svg viewBox="0 0 24 24" fill="#000000" width="24" height="24">
+                                        <path fill-rule="evenodd" d="M13.5,3 C14.327,3 15,3.673 15,4.5 L15,4.5 L15,5 L19,5 L19,6 L18,6 L18,17.5 C18,18.879 16.878,20 15.5,20 L15.5,20 L7.5,20 C6.122,20 5,18.879 5,17.5 L5,17.5 L5,6 L4,6 L4,5 L8,5 L8,4.5 C8,3.673 8.673,3 9.5,3 L9.5,3 Z M17,6 L6,6 L6,17.5 C6,18.327 6.673,19 7.5,19 L7.5,19 L15.5,19 C16.327,19 17,18.327 17,17.5 L17,17.5 L17,6 Z M10,9 L10,16 L9,16 L9,9 L10,9 Z M14,9 L14,16 L13,16 L13,9 L14,9 Z M13.5,4 L9.5,4 C9.224,4 9,4.225 9,4.5 L9,4.5 L9,5 L14,5 L14,4.5 C14,4.225 13.776,4 13.5,4 L13.5,4 Z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </li>
+                    </ul> -->
+                </div>
+                <!-- PROMO CODE & BUYER NOTES -->
+                <div class="coupon-notes">
+                    <!-- PROMO CODE -->
+                    <div class="coupon">
+                        <button type="button" class="btn coupon-notes-btns" data-bs-toggle="collapse" data-bs-target="#coupon-collapse" aria-expanded="false" aria-controls="coupon-collapse">
+                            <svg viewBox="0 0 14 16" fill="#E71D1D" width="14" height="16">
+                                <g id="final-cart" stroke="none" fill="none" stroke-width="1" fill-rule="evenodd">
+                                    <g id="general-layout" transform="translate(-515 -839)" fill="#E71D1D">
+                                        <g id="coupon-icon" transform="rotate(30 -1300.653 1393.349)">
+                                            <path id="Rectangle-6" fill-rule="nonzero" d="M1,14.0046024 C0.999339408,13.9996515 9.00460243,14 9.00460243,14 C8.99965149,14.0006606 9,5.41421356 9,5.41421356 L5,1.41421356 L1,5.41421356 L1,14.0046024 Z M-2.72848411e-12,5 L5,-4.66116035e-12 L10,5 L10,14.0046024 C10,14.5543453 9.5443356,15 9.00460243,15 L0.995397568,15 C0.445654671,15 -2.72848411e-12,14.5443356 -2.72848411e-12,14.0046024 L-2.72848411e-12,5 Z"></path>
+                                            <circle id="Oval-2" cx="5" cy="5" r="1"></circle>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                            <span class="coupon-label">Enter a promo code</span>
+                        </button>
+                        <div class="collapse" id="coupon-collapse">
+                            <input type="text" id="input-promo" data-error="false" data-success="false" data-empty-state="true" maxlength="20" aria-invalid="false" placeholder="Enter a promo code" value>
+                            <button type="button" tabindex="0" class="btn apply-btn">Apply</button>
+                        </div>
+                    </div>
+                    <!-- BUYER NOTE -->
+                    <div class="buyer-note">
+                        <button type="button" class="btn coupon-notes-btns" data-bs-toggle="collapse" data-bs-target="#note-collapse" aria-expanded="false" aria-controls="note-collapse">
+                            <svg viewBox="0 0 12 13" width="12" height="13">
+                                <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
+                                    <g transform="translate(-515 -882)">
+                                        <g transform="translate(515 882)">
+                                            <path stroke="#E71D1D" d="M.5.5h7.778L11.5 3.737V12.5H.5V.5z"></path>
+                                            <path stroke="#E71D1D" d="M10.793 3.5H8.5V1.207L10.793 3.5z"></path>
+                                            <path fill="#E71D1D" d="M3 3H6V4H3z"></path>
+                                            <path fill="#E71D1D" d="M3 6H9V7H3z"></path>
+                                            <path fill="#E71D1D" d="M3 9H9V10H3z"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                            <span class="note-label">Add to note</span>
+                        </button>
+                        <div class="collapse" id="note-collapse">
+                            <textarea id="textarea-notes" maxlength="250" placeholder="Instructions? Special Request? Add them here." aria-label="Instructions? Special Request? Add them here." aria-invalid="false"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- SUMMARY OF THE ORDER (SUBTOTAL, DELIVERY FEE & DESTINATION, TOTAL PRICE) -->
+            <aside class="order-summary d-none">
+                <!-- SUMMARY HEADER -->
+                <div class="summary-header">
+                    <h2>Order summary</h2>
+                </div>
+                <!-- ROW FOR SUBTOTAL, DELIVERY FEE, & SHIPPING DESTINATION -->
+                <div class="row-2">
+                    <div class="subTotals" data-hook="SubTotals.root">
+                        <dl>
+                            <dt>Subtotal</dt>
+                            <dd data-hook="SubTotals.subtotalText">₱150.98</dd>
+                        </dl>
+                    </div>
+                    <div class="deliveryFee" data-hook="TotalShipping.root">
+                        <dl>
+                            <dt>
+                                <div data-hook="TotalShipping.shippingDestinationWithTitle">
+                                    <span data-hook="totalShipping.title">Delivery</span>
+                                    &nbsp;
+                                </div>
+                                <div data-hook="ShippingDestination.shippingDestination">
+                                    <button type="button" data-hook="ShippingDestination.changeRegion" aria-haspopup="true" aria-label="click to change delivery destination">Philippines</button>
+                                </div>
+                            </dt>
+                            <dd data-hook="TotalShipping.estimatedShipping">FREE</dd>
+                        </dl>
+                    </div>
+                </div>
+                <!-- ROW FOR TOTAL AMOUNT -->
+                <div class="total">
+                    <dl>
+                        <dt><span data-hook="Total.title">Total</span></dt>
+                        <dd id="total-sum" aria-live="polite" role="status" data-hook="Total.formattedValue">₱150.98</dd>
+                    </dl>
+                </div>
+                <!-- CHECKOUT BUTTON -->
+                <div class="row-4" data-hook="CheckoutButtons.default">
+                    <button type="button" class="btn" tabindex="0" aria-disabled="false" aria-live="assertive" data-hook="CheckoutButtonDataHook.button"><span>Checkout</span></button>
+                </div>
+                <!-- SECURE CHECKOUT SVG & TEXT -->
+                <div class="row-5" data-hook="SecureCheckoutDataHook.root">
+                    <p>
+                        <svg viewBox="0 0 11 14" width="11" height="14" data-hook="SecureCheckoutDataHook.lock">
+                            <g fill="#000000" fill-rule="evenodd">
+                                <path d="M0 12.79c0 .558.445 1.01.996 1.01h9.008A1 1 0 0 0 11 12.79V6.01c0-.558-.445-1.01-.996-1.01H.996A1 1 0 0 0 0 6.01v6.78Z"></path>
+                                <path fill-rule="nonzero" d="M9.5 5v-.924C9.5 2.086 7.696.5 5.5.5c-2.196 0-4 1.586-4 3.576V5h1v-.924c0-1.407 1.33-2.576 3-2.576s3 1.17 3 2.576V5h1Z"></path>
+                            </g>
+                        </svg>
+                        <span data-hook="SecureCheckoutDataHook.text">Secure Checkout</span>
+                    </p>
+                </div>
+            </aside>
+            <!-- CART WHEN ITS EMPTY -->
+            <div class="empty-cart-container">
+                <div class="empty-cart-header">
+                    <h2>My cart</h2>
+                </div>
+                <div class="empty-cart-text">
+                    <h3>Cart is empty</h3>
+                    <a href="./index.html" class="continue-btn">Continue Browsing</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- REUSEABLE FOOTER -->
+    <footer-component></footer-component>
+    <script src="script.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopNest</title>
+    <link rel="icon" href="./img/icons/shopnest-icon.webp">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="components/header.js" type="text/javascript" defer></script>
+    <script src="components/footer.js" type="text/javascript" defer></script>
+</head>
+<body onresize="myFunction()">
+    <!-- REUSEABLE HEADER -->
+    <header-component></header-component>
+    <!-- THANK YOU CONTENT -->
+    <main class="d-flex flex-column">
+        <!-- THANK YOU SECTION -->
+        <section class="thank-you">
+            <div class="container-fluid">
+                <!-- HEADER -->
+                <div class="header-text">
+                    <h2 class="header-title">Thank you, Customer Name</h2>
+                    <p class="header-subtitle">You'll receive a confirmation email soon.</p>
+                    <p class="order-number">Order number: 10000</p>
+                </div>
+                <!-- ITEM AND TOTAL CARD -->
+                <div class="card card-body card-1">
+                    <!-- ITEM ROW -->
+                    <div class="row-1">
+                        <!-- SVG COLUMN -->
+                        <div class="col-1">
+                            <svg viewBox="0 0 32 32" fill="#FFFFFF" width="50" height="50">
+                                <path fill="#FFFFFF" d="M30.026 3.502h-8.903c0.279-0.503 0.354-1.118 0.186-1.732-0.168-0.633-0.652-1.173-1.267-1.471s-1.267-0.298-1.863-0.037c-0.801 0.354-1.453 1.304-2.254 2.515-0.801-1.211-1.434-2.161-2.254-2.515-0.596-0.261-1.267-0.242-1.863 0.037-0.615 0.298-1.080 0.838-1.267 1.471-0.168 0.615-0.093 1.229 0.186 1.732h-8.755c-0.95 0-1.714 0.764-1.714 1.714v25.071c0 0.95 0.764 1.714 1.714 1.714h28.051c0.95 0 1.714-0.764 1.714-1.714v-25.071c0-0.95-0.764-1.714-1.714-1.714zM18.645 1.304c0.391-0.168 0.727-0.056 0.913 0.019 0.317 0.149 0.559 0.428 0.652 0.745 0.056 0.223 0.186 0.969-0.689 1.434h-2.682c0.652-1.006 1.285-1.975 1.807-2.198zM11.66 2.067c0.075-0.298 0.335-0.577 0.652-0.745 0.168-0.075 0.521-0.205 0.913-0.019 0.521 0.223 1.155 1.173 1.807 2.198h-2.682c-0.875-0.447-0.745-1.211-0.689-1.434zM1.378 30.287v-25.071c0-0.335 0.261-0.596 0.596-0.596h13.374v26.263h-13.374c-0.335 0-0.596-0.261-0.596-0.596zM30.622 30.287c0 0.335-0.261 0.596-0.596 0.596h-13.56v-26.263h13.56c0.335 0 0.596 0.261 0.596 0.596v25.071z"></path>
+                            </svg>
+                        </div>
+                        <!-- PRODUCT NAME, PRICE, AND OPTION COLUMN -->
+                        <div class="col-2">
+                            <h6 class="product-item-name">Product Name</h6>
+                            <p class="product-item-price">₱0.00</p>
+                            <ul class="product-item-option">
+                                <li>Product option 1</li>
+                                <li>Product option 2</li>
+                                <li>Product option 3</li>
+                            </ul>
+                        </div>
+                        <!-- QUANTITY COLUMN -->
+                        <div class="col-3">
+                            <h6 class="product-item-qty">Qty: 1</h6>
+                        </div>
+                    </div>
+                    <!-- BORDER -->
+                    <hr class="solid">
+                    <!-- TOTAL ROW -->
+                    <div class="row-2">
+                        <!-- NOTE -->
+                        <div class="col-1">
+                            <p class="note">Note</p>
+                            <p class="customer-note">Your customer's note will show here.</p>
+                        </div>
+                        <!-- BORDER -->
+                        <hr class="solid">
+                        <!-- TOTAL TABLE -->
+                        <div class="col-2">
+                            <!-- FIRST TABLE FOR SUBTOTAL, DELIVERY FEE, TAX -->
+                            <table class="total-table">
+                                <tbody>
+                                    <tr class="subtotal-row">
+                                        <td>Subtotal</td>
+                                        <td>₱0.00</td>
+                                    </tr>
+                                    <tr class="delivery-row">
+                                        <td>Delivery</td>
+                                        <td>Free</td>
+                                    </tr>
+                                    <tr class="tax-row">
+                                        <td>Sales Tax</td>
+                                        <td>₱10.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- BORDER -->
+                            <hr class="solid">
+                            <!-- SECOND TABLE FOR TOTAL PRICE -->
+                            <table class="total-table">
+                                <tbody>
+                                    <tr class="total-row">
+                                        <td>Total</td>
+                                        <td>₱10.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- SHIPPING CARD -->
+                <div class="card card-body card-2">
+                    <!-- SHIPPING COLUMN -->
+                    <div class="col-1">
+                        <h6 class="shipping-address">Delivery address</h6>
+                        <p>Customer Name</p>
+                        <p>Street, City, State Zip Code, Country</p>
+                        <p>Phone number</p>
+                        <p class="delivery-time">3-5 Business Days</p>
+                    </div>
+                    <!-- BILLING COLUMN -->
+                    <div class="col-2">
+                        <h6 class="billing-address">Billing address</h6>
+                        <p>Customer Name</p>
+                        <p>Street, City, State Zip Code, Country</p>
+                        <p>Phone number</p>
+                    </div>
+                </div>
+                <!-- HOME LINK BUTTON -->
+                <div class="continue-browsing"><a href="./index.html">Continue Browsing</a></div>
+            </div>
+        </section>
+    </main>
+    <!-- REUSEABLE FOOTER -->
+    <footer-component></footer-component>
+    <script src="script.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

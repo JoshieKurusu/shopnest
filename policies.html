@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopNest</title>
+    <link rel="icon" href="./img/icons/shopnest-icon.webp">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="components/header.js" type="text/javascript" defer></script>
+    <script src="components/footer.js" type="text/javascript" defer></script>
+</head>
+<body onresize="myFunction()">
+    <!-- REUSEABLE HEADER -->
+    <header-component></header-component>
+    <!-- STORE POLICIES CONTENT -->
+    <main class="d-flex flex-column">
+        <!-- STORE POLICIES SECTION -->
+        <section class="store-policies">
+            <div class="container-fluid">
+                <!-- SHIPPING POLICY -->
+                <div class="shipping-policy">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="40.026 40.026 319.948 319.948" data-bbox="40.026 40.026 319.948 319.948" data-type="color" role="presentation" aria-hidden="true">
+                        <path fill="#E71D1D" data-color="1" d="M200 40.026c-88.351 0-159.974 71.623-159.974 159.974S111.649 359.974 200 359.974c88.352 0 159.974-71.623 159.974-159.974S288.352 40.026 200 40.026zm17.786 228.68h-50.202l-.638-1.422.054-.117-12.914-28.099v-.001l-35.254-76.47h51.493l22.422 48.548 36.928-79.852h51.494l-63.383 137.413z"></path>
+                        <path fill="#E71D1D" data-color="1" opacity=".3" d="M192.747 211.146l-25.039 57.56-10.601-23.065 17.82-73.079 17.82 38.584z"></path>
+                    </svg>
+                    <h3 class="header">Shipping Policy</h3>
+                    <p class="title">How We Do it</p>
+                    <p class="paragraph">This is your Shipping Policy section. It's a great place to update your customers about your shipping methods, packaging, and costs. Use concise, straightforward language to build trust with your customers and keep them coming back for more!</p>
+                    <button type="button" class="btn">Learn More</button>
+                </div>
+                <!-- RETURNS -->
+                <div class="returns">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="40.026 40.026 319.948 319.948" data-bbox="40.026 40.026 319.948 319.948" data-type="color" role="presentation" aria-hidden="true">
+                        <path fill="#E71D1D" data-color="1" d="M200 40.026c-88.351 0-159.974 71.623-159.974 159.974S111.649 359.974 200 359.974c88.352 0 159.974-71.623 159.974-159.974S288.352 40.026 200 40.026zm17.786 228.68h-50.202l-.638-1.422.054-.117-12.914-28.099v-.001l-35.254-76.47h51.493l22.422 48.548 36.928-79.852h51.494l-63.383 137.413z"></path>
+                        <path fill="#E71D1D" data-color="1" opacity=".3" d="M192.747 211.146l-25.039 57.56-10.601-23.065 17.82-73.079 17.82 38.584z"></path>
+                    </svg>
+                    <h3 class="header">Returns</h3>
+                    <p class="title">How It Works</p>
+                    <p class="paragraph">This is your Return Policy section. It's a great place to let your customers know what to do in case they've changed their mind about their purchase, or if they're dissatisfied with a product. Having a straightforward return or exchange policy is a great way to reassure your customers that they can buy with confidence and keep them coming back for more!</p>
+                    <button type="button" class="btn">Get in Touch</button>
+                </div>
+                <!-- WARRANTY -->
+                <div class="warranty">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="40.026 40.026 319.948 319.948" data-bbox="40.026 40.026 319.948 319.948" data-type="color" role="presentation" aria-hidden="true">
+                        <path fill="#E71D1D" data-color="1" d="M200 40.026c-88.351 0-159.974 71.623-159.974 159.974S111.649 359.974 200 359.974c88.352 0 159.974-71.623 159.974-159.974S288.352 40.026 200 40.026zm17.786 228.68h-50.202l-.638-1.422.054-.117-12.914-28.099v-.001l-35.254-76.47h51.493l22.422 48.548 36.928-79.852h51.494l-63.383 137.413z"></path>
+                        <path fill="#E71D1D" data-color="1" opacity=".3" d="M192.747 211.146l-25.039 57.56-10.601-23.065 17.82-73.079 17.82 38.584z"></path>
+                    </svg>
+                    <h3 class="header">Warranty at ShopNest</h3>
+                    <p class="title">Our Policy</p>
+                    <p class="paragraph">This is your Warranty Disclaimer section. It's a great place to inform your customers about all the services that are offered once they buy one of your products. This section should include all the relevant information about the way your customers should use or manage the products they purchased on your site. The disclaimer is legally binding, so use straightforward language to gain their trust and loyalty.</p>
+                    <button type="button" class="btn">Get in Touch</button>
+                </div>
+                <!-- PRIVACY -->
+                <div class="privacy">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="40.026 40.026 319.948 319.948" data-bbox="40.026 40.026 319.948 319.948" data-type="color" role="presentation" aria-hidden="true">
+                        <path fill="#E71D1D" data-color="1" d="M200 40.026c-88.351 0-159.974 71.623-159.974 159.974S111.649 359.974 200 359.974c88.352 0 159.974-71.623 159.974-159.974S288.352 40.026 200 40.026zm17.786 228.68h-50.202l-.638-1.422.054-.117-12.914-28.099v-.001l-35.254-76.47h51.493l22.422 48.548 36.928-79.852h51.494l-63.383 137.413z"></path>
+                        <path fill="#E71D1D" data-color="1" opacity=".3" d="M192.747 211.146l-25.039 57.56-10.601-23.065 17.82-73.079 17.82 38.584z"></path>
+                    </svg>
+                    <h3 class="header">Privacy at ShopNest</h3>
+                    <p class="title">All about Information Security</p>
+                    <p class="paragraph">
+                        This is your Privacy Policy section. It's a great place to inform your customers about how you use, store, and protect their personal information. Add details such as how you use third-party banking to verify payment, or about the way you collect customers' data and use it once their purchase has been completed.
+                        <br><br>
+                        Your user's privacy is of the highest importance to your business, so take the time to write an accurate and detailed policy. Use straightforward language, so they can shop with confidence, time, and time again!
+                    </p>
+                    <button type="button" class="btn">Learn More</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- REUSEABLE FOOTER -->
+    <footer-component></footer-component>
+    <script src="script.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

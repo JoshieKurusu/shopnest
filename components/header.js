@@ -86,15 +86,16 @@ function openCartSidebar() {
 
 function redirectToCartPage() {
     // console.log("redirected to cart page! *INNERWIDTH");
-    window.location.href = "http://127.0.0.1:5500/cart.html";
-    // window.location.href = "https://joshiekurusu.github.io/shopnest/cart.html";
+    // window.location.href = "http://127.0.0.1:5500/cart.html";
+    window.location.href = "https://joshiekurusu.github.io/shopnest/cart.html";
 }
 
 // Function to handle cart button state
 function updateCartButton() {
     const isInnerWideScreen = window.innerWidth >= 768;
-    const isCartPage = window.location.href === "http://127.0.0.1:5500/cart.html";
-
+    // const isCartPage = window.location.href === "http://127.0.0.1:5500/cart.html";
+    const isCartPage = window.location.href === "https://joshiekurusu.github.io/shopnest/cart.html";
+    
     // Enable or disable the cart button based on the current page
     if (isCartPage) {
         cartBtn.setAttribute('disabled', 'true');

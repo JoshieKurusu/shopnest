@@ -144,10 +144,11 @@ function toggleHeaderImage() {
             headerImage.classList.add('.hide-header-img');
             headerImage.classList.remove('.show-header-img');
         }
-        console.log(`Header image is now ${isInnerWideScreen ? 'visible' : 'hidden'}`);
-    } else {
-        console.error("Error: .header-img element not found in the DOM");
-    }
+        // console.log(`Header image is now ${isInnerWideScreen ? 'visible' : 'hidden'}`);
+    } 
+    // else {
+    //     console.error("Error: .header-img element not found in the DOM");
+    // }
 }
 
 // Initialization function
@@ -197,30 +198,6 @@ if (activeLinkId) {
     navigationLink.forEach(navLink => navLink.classList.remove('active'));
 }
 
-// SAVE CART DATA TO LOCALSTORAGE
-function saveCartData() {
-    const cartItems = [];
-    document.querySelectorAll('.item-list .card').forEach(cartItem => {
-    const id = cartItem.getAttribute('id');
-    const img = cartItem.querySelector('.product-img').src ;
-    const page = cartItem.querySelector('.product-img').getAttribute('data-page');
-    const name = cartItem.querySelector('.cart-product-name').textContent;
-    const amount = parseFloat(cartItem.querySelector('.cart-product-amount').textContent.replace('₱', ''));
-    const quantity = parseInt(cartItem.querySelector('.cart-input').value);
-    cartItems.push({ id, page, img, name, amount, quantity });
-    });
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    // console.log('Saved cartItems:', localStorage.getItem('cartItems'));
-    
-    if (cartItems.length === 0) {
-        localStorage.removeItem('cartItems');
-        // console.log('Cart is empty. Removed cartItems from localStorage.');
-    } else {
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-        // console.log('Cart data saved to localStorage:', JSON.stringify(cartItems, null, 2));
-    }
-}
-
 // LOAD CART DATA FROM LOCALSTORAGE
 function loadCartData() {
     const savedCartItems = localStorage.getItem('cartItems');
@@ -239,34 +216,30 @@ function loadCartData() {
     if (savedCartItems && savedTotalPrice) {
         try {
             const cartItems = JSON.parse(savedCartItems);
-            // console.log('Loaded Cart Items:', cartItems);
-            // console.log('Loaded Total Price:', savedTotalPrice);
+            console.log('Loaded Cart Items:', cartItems);
+            console.log('Loaded Total Price:', savedTotalPrice);
             
             // Display Cart Items
-            cartItems.forEach(item => updateCartUI(item, itemList));
+            cartItems.forEach(item => displayCartItem(item, itemList));
 
             // Display Total Price
-            if (!isNaN(savedTotalPrice)) {
-                totalAmountElement.innerText = `₱${savedTotalPrice.toFixed(2)}`;
-            } else {
-                console.error('Invalid total price value in localStorage.');
-                totalAmountElement.innerText = '₱0.00';
-            }
+            totalAmountElement.innerText = `₱${savedTotalPrice}`;
 
             return cartItems; // Return for debugging purposes
         } catch (error) {
             console.error('Error parsing cartItems from localStorage:', error);
             return null;
         }
-    } else {
-        // console.log('No cart data found in localStorage');
+    } 
+    else {
+        console.log('No cart data found in localStorage');
         return null;
     }
 }
 
-function updateCartUI(item, itemList) {
+function displayCartItem(item, itemList) {
     const cartItem = document.createElement('div');
-    cartItem.setAttribute("id", item.id);
+    cartItem.setAttribute("id", `cart-item-${item.id}`);
     cartItem.classList.add('card');
     cartItem.innerHTML = `
         <img class="product-img" src="${item.img}" alt="${item.name}" data-page="${item.page}">
@@ -282,15 +255,16 @@ function updateCartUI(item, itemList) {
         <button type="button" class="btn-close remove-btn"></button>
     `;
     itemList.appendChild(cartItem);
-
-    cartItemsCounter();
-    removeItem();
-    addQuantityEventListeners(cartItem);
 }
 
-// // Call the function
-// const cartItems = loadCartData();
+// Call the function
+const cartItems = loadCartData();
 // cartItems ? console.log('Cart successfully loaded:', cartItems) : console.warn('Cart is empty or data not found in localStorage');
+if(cartItems) {
+    console.log('Cart successfully loaded:', cartItems);
+} else {
+    console.warn('Cart is empty or data not found in localStorage');
+}
 
 // INITIAL SETUP
 function cartItemsInitialSetup() {
@@ -302,6 +276,13 @@ function cartItemsInitialSetup() {
         itemCounterText: document.getElementById("items-count")
     };
 }
+
+// const itemList = document.querySelector('.item-list'); 
+// const subtotal = document.querySelector('.total'); 
+// const emptyText = document.querySelector('.empty-cart'); 
+// const offcanvasFooter = document.querySelector('.offcanvas-footer'); 
+// let itemCounterText = document.getElementById("items-count");
+
 // CART ITEM LIST COUNTER
 function cartItemsCounter() {
     const { itemList, subtotal, emptyText, offcanvasFooter } = cartItemsInitialSetup();
@@ -331,6 +312,7 @@ function cartItemsCounter() {
         }
     });
 }
+cartItemsCounter();
 
 // CALCULATE THE TOTAL PRICE OF THE ITEMS ON THE CART
 function updateTotalPrice() {
@@ -342,7 +324,7 @@ function updateTotalPrice() {
         const price = parseFloat(cartItem.querySelector(".cart-product-amount").innerText.replace("₱", ""));
         const quantity = parseInt(cartItem.querySelector(".cart-input").value);
         total.classList.add('blur');
-
+        
         sum += price * quantity;
     });
     setTimeout(() => {
@@ -384,7 +366,6 @@ function removeItem() {
 
                 // CHECK IF THERE'S AN ITEM IN CART
                 const itemCard = document.querySelector('.item-list .card');
-
                 const { itemList, subtotal, emptyText, offcanvasFooter } = cartItemsInitialSetup();
                 let { itemCounterText } = cartItemsInitialSetup();
                 if(!itemCard) {
@@ -398,35 +379,4 @@ function removeItem() {
         });
     });
 }
-
-// MULTIPLE INPUT NUMBER INSIDE THE CART SIDEBAR
-function addQuantityEventListeners(cartItem) {
-    const incrementBtn = cartItem.querySelector(".fa-plus");
-    const decrementBtn = cartItem.querySelector(".fa-minus");
-    const quantityInput = cartItem.querySelector(".cart-input");
-
-    incrementBtn.addEventListener("click", () => {
-        quantityInput.value = parseInt(quantityInput.value) + 1;
-        updateTotalPrice(); // Update total price when quantity changes
-        cartItemsCounter(); // Update item count display when quantity changes
-        saveCartData(); // UPDATE THE QUANTITY ON LOCALSTORAGE
-    });
-
-    decrementBtn.addEventListener("click", () => {
-        if (quantityInput.value > 1) {
-            quantityInput.value = parseInt(quantityInput.value) - 1;
-            updateTotalPrice(); // Update total price when quantity changes
-            cartItemsCounter(); // Update item count display when quantity changes
-            saveCartData(); // UPDATE THE QUANTITY ON LOCALSTORAGE
-        }
-    });
-
-    quantityInput.addEventListener("change", () => {
-        if (quantityInput.value < 1) {
-            quantityInput.value = 1;
-        }
-        updateTotalPrice(); // Update total price when quantity changes
-        cartItemsCounter(); // Update item count display when quantity changes
-        saveCartData(); // UPDATE THE QUANTITY ON LOCALSTORAGE
-    });
-}
+removeItem();

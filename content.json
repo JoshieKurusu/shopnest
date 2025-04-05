@@ -2,6 +2,7 @@
     "products": [
         {
             "id": 0,
+            "page": 1,
             "name": "EcoChic Vegan Leather Handbag",
             "img": "img/products/leather-handbag.webp",
             "amount": 3649.99,
@@ -10,6 +11,7 @@
         },
         {
             "id": 1,
+            "page": 2,
             "name": "Bamboo Shades",
             "img": "img/products/bamboo-shades.webp",
             "amount": 1784.99,
@@ -18,6 +20,7 @@
         },
         {
             "id": 2,
+            "page": 3,
             "name": "Organic Cotton Tee",
             "img": "img/products/cotton-tee.webp",
             "amount": 849.99,
@@ -26,6 +29,7 @@
         },
         {
             "id": 3,
+            "page": 4,
             "name": "Minimalist Vegan Leather Strap Watch",
             "img": "img/products/leather-strap-watch.webp",
             "amount": 3379.99,
@@ -34,6 +38,7 @@
         },
         {
             "id": 4,
+            "page": 5,
             "name": "Minimalist Vegan Leather Wallet",
             "img": "img/products/leather-wallet.webp",
             "amount": 999.99,
@@ -42,6 +47,7 @@
         },
         {
             "id": 5,
+            "page": 6,
             "name": "Trendy Vegan Leather Tote Bag",
             "img": "img/products/leather-tote-bag.webp",
             "amount": 2794.99,
@@ -50,14 +56,16 @@
         },
         {
             "id": 6,
+            "page": 7,
             "name": "EcoChic Recycled Backpack",
             "img": "img/products/recycled-backpack.webp",
-            "amount": 4719.99,
+            "amount": 4717.99,
             "category": "eco-friendly",
             "description": "The EcoChic Recycled Backpack is a stylish and sustainable choice for carrying your belongings. Made from recycled materials, this backpack helps reduce waste and minimize your environmental impact. It features multiple compartments for easy organization and adjustable straps for a comfortable fit. Whether you're heading to work, school, or a weekend adventure, the EcoChic Recycled Backpack is the perfect eco-friendly accessory."
         },
         {
             "id": 7,
+            "page": 8,
             "name": "Sleek Vegan Leather Phone Case",
             "img": "img/products/leather-phone-case.webp",
             "amount": 499.99,
@@ -66,6 +74,7 @@
         },
         {
             "id": 8,
+            "page": 9,
             "name": "Organic Cotton Minimalist T-Shirt",
             "img": "img/products/cotton-tshirt.webp",
             "amount": 799.99,
@@ -74,6 +83,7 @@
         },
         {
             "id": 9,
+            "page": 10,
             "name": "EcoChic Recycled Headband",
             "img": "img//products/recycled-headband.webp",
             "amount": 449.99,

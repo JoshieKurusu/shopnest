@@ -288,10 +288,6 @@ function updateCartUI(item, itemList) {
     addQuantityEventListeners(cartItem);
 }
 
-// // Call the function
-// const cartItems = loadCartData();
-// cartItems ? console.log('Cart successfully loaded:', cartItems) : console.warn('Cart is empty or data not found in localStorage');
-
 // INITIAL SETUP
 function cartItemsInitialSetup() {
     return {

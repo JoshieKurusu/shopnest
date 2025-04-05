@@ -1313,7 +1313,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // IF IS IN THE CART PAGE SHOW THE ITEMS ON THE CART
-    const isCartPage = window.location.href === "http://127.0.0.1:5500/cart.html";
+    // const isCartPage = window.location.href === "http://127.0.0.1:5500/cart.html";
+    const isCartPage = window.location.href === "https://joshiekurusu.github.io/shopnest/cart.html";
     // isCartPage ? console.log('Yes!') : console.log('No!');
     if(isCartPage) {
         const cartItem = getCartData();

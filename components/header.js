@@ -78,10 +78,16 @@ customElements.define('header-component', Header);
 const cartBtn = document.getElementById('cart-btn');
 const offcanvas = document.getElementById('cartOffcanvas');
 
-// Named functions for cart button behaviors
+// NAMED FUNCTIONS FOR CART BUTTON BEHAVIORS
 function openCartSidebar() {
-    // console.log("open cart sidebar! *INNERWIDTH");
-    $("#cartOffcanvas").offcanvas('show');
+    if (window.innerWidth < 768) {
+        // REDIRECT TO THE CART PAGE IF THE SCREEN IS SMALL
+        redirectToCartPage();
+        return; // EXIT THE FUNCTION TO PREVENT FURTHER EXECUTION
+    } else {
+        // console.log("open cart sidebar! *INNERWIDTH");
+        $("#cartOffcanvas").offcanvas('show');
+    }
 }
 
 function redirectToCartPage() {
@@ -90,24 +96,24 @@ function redirectToCartPage() {
     window.location.href = "https://joshiekurusu.github.io/shopnest/cart.html";
 }
 
-// Function to handle cart button state
+// FUNCTION TO HANDLE CART BUTTON STATE
 function updateCartButton() {
     const isInnerWideScreen = window.innerWidth >= 768;
     // const isCartPage = window.location.href === "http://127.0.0.1:5500/cart.html";
     const isCartPage = window.location.href === "https://joshiekurusu.github.io/shopnest/cart.html";
     
-    // Enable or disable the cart button based on the current page
+    // ENABLE OR DISABLE THE CART BUTTON BASED ON THE CURRENT PAGE
     if (isCartPage) {
         cartBtn.setAttribute('disabled', 'true');
     } else {
         cartBtn.removeAttribute('disabled');
     }
 
-    // Clean up previous listeners
+    // CLEAN UP PREVIOUS LISTENERS
     cartBtn.removeEventListener('click', openCartSidebar);
     cartBtn.removeEventListener('click', redirectToCartPage);
 
-    // Add appropriate listener
+    // ADD APPROPRIATE LISTENER
     if (isInnerWideScreen) {
         cartBtn.addEventListener('click', openCartSidebar);
         // console.log("YES! *INNERWIDTH", window.innerWidth);
@@ -117,7 +123,7 @@ function updateCartButton() {
     }
 }
 
-// Function to handle offcanvas state based on browser width
+// FUNCTION TO HANDLE OFFCANVAS STATE BASED ON BROWSER WIDTH
 function updateOffcanvas() {
     const isInnerWideScreen = window.innerWidth >= 768;
 
@@ -151,51 +157,54 @@ function toggleHeaderImage() {
     }
 }
 
-// Initialization function
+// INITIALIZATION FUNCTION
 function initialize() {
     updateCartButton();
     updateOffcanvas();
     toggleHeaderImage();
 }
 
-// Attach the resize event listener
+// ATTACH THE RESIZE EVENT LISTENER
 window.addEventListener('resize', initialize);
 
-// Initial call to set the correct state on page load
+// INITAL CALL TO SET THE CORRECT STATE ON THE PAGE LOAD
 initialize();
 
 // SELECT ALL NAVIGATION
-const navigationLink = document.querySelectorAll('.nav-link');
+function initializeNavigation() {
+    const navigationLink = document.querySelectorAll('.nav-link');
 
-//  MAPPING URLs TO NAVIGATION LINK IDs FOR EASY LOOKUP
-const pageLinks = {
-    'https://joshiekurusu.github.io/shopnest/': '1',
-    'https://joshiekurusu.github.io/shopnest/index.html': '1',
-    'http://127.0.0.1:5500/index.html': '1',
-    'https://joshiekurusu.github.io/shopnest/policies.html': '2',
-    'http://127.0.0.1:5500/policies.html': '2',
-    'https://joshiekurusu.github.io/shopnest/category.html': '3',
-    'http://127.0.0.1:5500/category.html': '3',
-    'https://joshiekurusu.github.io/shopnest/blog.html': '4',
-    'http://127.0.0.1:5500/blog.html': '4'
-};
+    // NORMALIZE CURRENT URL TO AVOID ISSUES WITH TRAILING SLASHES
+    const currentURL = window.location.href.replace(/\/$/, '');
 
-// Add active class on click
-navigationLink.forEach(navLink => {
-    navLink.addEventListener('click', (event) => {
-        // Remove active class from all links
-        navigationLink.forEach(link => link.classList.remove('active'));
-        // Add active class to the clicked link
-        event.target.classList.add('active');
+    // MAP URLs TO NAVIGATION LINK IDs FOR EASY LOOKUP
+    const pageLinks = {
+        'https://joshiekurusu.github.io/shopnest': '1',
+        'https://joshiekurusu.github.io/shopnest/index.html': '1',
+        'http://127.0.0.1:5500/index.html': '1',
+        'https://joshiekurusu.github.io/shopnest/policies.html': '2',
+        'http://127.0.0.1:5500/policies.html': '2',
+        'https://joshiekurusu.github.io/shopnest/category.html': '3',
+        'http://127.0.0.1:5500/category.html': '3',
+        'https://joshiekurusu.github.io/shopnest/blog.html': '4',
+        'http://127.0.0.1:5500/blog.html': '4'
+    };
+
+    // SET ACTIVE CLASS BASED ON PAGE URL
+    const activeLinkId = pageLinks[currentURL];
+
+    if (activeLinkId) {
+        navigationLink.forEach(link => link.classList.remove('active')); // RESET ALL
+        document.getElementById(activeLinkId)?.classList.add('active'); // ADD THE ACTIVE CLASS
+    }
+
+    // ADD ACTIVE CLASS ON CLICK
+    navigationLink.forEach(navLink => {
+        navLink.addEventListener('click', (event) => {
+            navigationLink.forEach(link => link.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        });
     });
-});
-
-// Set active class based on page URL
-const activeLinkId = pageLinks[window.location.href];
-if (activeLinkId) {
-    document.getElementById(activeLinkId).classList.add('active');
-} else {
-    navigationLink.forEach(navLink => navLink.classList.remove('active'));
 }
 
 // SAVE CART DATA TO LOCALSTORAGE
@@ -227,7 +236,7 @@ function loadCartData() {
     const savedCartItems = localStorage.getItem('cartItems');
     const savedTotalPrice = parseFloat(localStorage.getItem('totalPrice'));
 
-    // Verify DOM elements exist
+    // VERIFY DOM ELEMENTS EXIST
     const itemList = document.querySelector('.item-list');
     const totalAmountElement = document.querySelector('.total-amount');
 
@@ -243,10 +252,10 @@ function loadCartData() {
             // console.log('Loaded Cart Items:', cartItems);
             // console.log('Loaded Total Price:', savedTotalPrice);
             
-            // Display Cart Items
+            // DISPLAY CART ITEMS
             cartItems.forEach(item => updateCartUI(item, itemList));
 
-            // Display Total Price
+            // DISPLAY TOTAL PRICE
             if (!isNaN(savedTotalPrice)) {
                 totalAmountElement.innerText = `₱${savedTotalPrice.toFixed(2)}`;
             } else {
@@ -254,7 +263,7 @@ function loadCartData() {
                 totalAmountElement.innerText = '₱0.00';
             }
 
-            return cartItems; // Return for debugging purposes
+            return cartItems; // RETURN FOR DEBUGGING PURPOSES
         } catch (error) {
             console.error('Error parsing cartItems from localStorage:', error);
             return null;

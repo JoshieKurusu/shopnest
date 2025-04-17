@@ -81,10 +81,11 @@ header nav .container-fluid .navbar-collapse {
   right: 0;
   bottom: 0;
   z-index: 2;
-  background-color: rgb(var(--color-));
+  background-color: rgb(var(--color-1));
   transition: 0.15s ease-in-out;
 }
 header nav .container-fluid .navbar-collapse ul {
+  margin-top: 11px;
   text-align: center;
   font-size: clamp(0.875rem, -0.893vw + 1.429rem, 1.25rem);
   line-height: clamp(1.313rem, -1.339vw + 2.143rem, 1.875rem);
@@ -2299,12 +2300,12 @@ footer .container-fluid p {
 
 @media (min-width: 325px) {
   header nav .container-fluid .navbar-collapse {
-    width: 70%;
+    width: 263px;
   }
 }
 @media (min-width: 425px) {
   header nav .container-fluid .navbar-collapse {
-    width: 55%;
+    width: 273px;
   }
   .product .container-fluid .row-1, .product .container-fluid .row-2 .product-item {
     width: 330px;
@@ -2319,7 +2320,7 @@ footer .container-fluid p {
 }
 @media (min-width: 576px) {
   header nav .container-fluid .navbar-collapse {
-    width: 45%;
+    width: 283px;
   }
   .items .container-fluid {
     max-width: 576px;
@@ -2401,6 +2402,9 @@ footer .container-fluid p {
     padding-top: 0;
     position: static;
     justify-content: end;
+  }
+  header nav .container-fluid .navbar-collapse ul {
+    margin-top: 0px;
   }
   header nav .container-fluid .navbar-collapse ul li a {
     padding: 4px 8px;

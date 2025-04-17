@@ -1300,6 +1300,7 @@ getContent().then(details => {
 });
 // SCRIPT WITHOUT ACCESSING THE JSON FILE
 document.addEventListener('DOMContentLoaded', () => {
+    initializeNavigation();
 
     // INITIAL SETUP
     function cartPageItemsInitialSetup() {

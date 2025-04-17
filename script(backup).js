@@ -1300,22 +1300,28 @@ getContent().then(details => {
 });
 // SCRIPT WITHOUT ACCESSING THE JSON FILE
 document.addEventListener('DOMContentLoaded', () => {
-    const cartItems = loadCartData();
-    // cartItems ? console.log('Cart successfully loaded:', cartItems) : console.warn('Cart is empty or data not found in localStorage');
-    if(!cartItems) {
-        console.warn('Cart is empty or data not found in localStorage');
+    initializeNavigation();
+
+    // INITIAL SETUP
+    function cartPageItemsInitialSetup() {
+        return {
+            cartPageContainer: document.querySelector('.cart-section .container-fluid'),
+            orderSummary: document.querySelector('.order-summary'),
+            emptyCart: document.querySelector('.empty-cart-container'),
+            itemCartCounterText: document.getElementById("items-count")
+
+        };
     }
 
     // IF IS IN THE CART PAGE SHOW THE ITEMS ON THE CART
-    const isCartPage = window.location.href === "http://127.0.0.1:5500/cart.html";
+    // const isCartPage = window.location.href === "http://127.0.0.1:5500/cart.html";
+    const isCartPage = window.location.href === "https://joshiekurusu.github.io/shopnest/cart.html";
     // isCartPage ? console.log('Yes!') : console.log('No!');
     if(isCartPage) {
         const cartItem = getCartData();
 
-        const cartPageContainer = document.querySelector('.cart-section .container-fluid');
-        const orderSummary = document.querySelector('.order-summary');
-        const emptyCart = document.querySelector('.empty-cart-container');
-
+        const { cartPageContainer, orderSummary, emptyCart } = cartPageItemsInitialSetup();
+ 
         if(cartItem)  {
             // console.log('Cart successfully loaded:', cartItems);
 
@@ -1330,6 +1336,13 @@ document.addEventListener('DOMContentLoaded', () => {
             cartPageContainer.style.display = 'none';
             orderSummary.style.display = 'none';
             emptyCart.style.display = 'block';
+        }
+
+    } else {
+        const cartItems = loadCartData();
+        // cartItems ? console.log('Cart successfully loaded:', cartItems) : console.warn('Cart is empty or data not found in localStorage');
+        if(!cartItems) {
+            console.warn('Cart is empty or data not found in localStorage');
         }
     }
 
@@ -1382,7 +1395,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cartItem.classList.add('cart-items');
         cartItem.innerHTML = `
             <div class="card" id="${product.id}">
-                <img src="${product.img}" alt="${product.name}">
+                <img class="product-img" src="${product.img}" alt="${product.name}" data-page="${product.page}">
                 <div class="card-body">
                     <div class="cart-product-text">
                         <h6 class="cart-product-name">${product.name}</h6>
@@ -1393,9 +1406,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <input type="number" class="cart-input" aria-label="Quantity" max="99999" min="1" value="${product.quantity}">
                         <button type="button" class="btn fa fa-plus signs" id="plus"></button>
                     </div>
-                    <h6 class="cart-subtotal">₱${(product.amount * product.quantity).toFixed(2)}</h6>
+                    <h6 class="item-subtotal">₱${(product.amount * product.quantity).toFixed(2)}</h6>
                 </div>
-                <button type="button" class="btn remove-btn">
+                <button type="button" class="btn remove-item-btn">
                     <svg viewBox="0 0 24 24" fill="#000000" width="24" height="24">
                         <path fill-rule="evenodd" d="M13.5,3 C14.327,3 15,3.673 15,4.5 L15,4.5 L15,5 L19,5 L19,6 L18,6 L18,17.5 C18,18.879 16.878,20 15.5,20 L15.5,20 L7.5,20 C6.122,20 5,18.879 5,17.5 L5,17.5 L5,6 L4,6 L4,5 L8,5 L8,4.5 C8,3.673 8.673,3 9.5,3 L9.5,3 Z M17,6 L6,6 L6,17.5 C6,18.327 6.673,19 7.5,19 L7.5,19 L15.5,19 C16.327,19 17,18.327 17,17.5 L17,17.5 L17,6 Z M10,9 L10,16 L9,16 L9,9 L10,9 Z M14,9 L14,16 L13,16 L13,9 L14,9 Z M13.5,4 L9.5,4 C9.224,4 9,4.225 9,4.5 L9,4.5 L9,5 L14,5 L14,4.5 C14,4.225 13.776,4 13.5,4 L13.5,4 Z"></path>
                     </svg>
@@ -1403,45 +1416,193 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
         productArray.appendChild(cartItem);
+
+        itemsCounter();
+        removeCartItem();
+        updateCartTotalPrice();
+        addQuantityCartEventListeners(cartItem);
     }
 
-    // function removeItemFromCart(productId) {
-    //     // GET CART ITEMS FROM LOCALSTORAGE
-    //     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    // CALCULATE THE TOTAL PRICE OF THE ITEMS ON THE CART
+    function updateCartTotalPrice() {
+        const cartItems = document.querySelectorAll(".cart-items .card");
+        const subtotal = document.querySelector('[data-hook="SubTotals.subtotalText"]');
+        const totalAmount = document.querySelector('[data-hook="Total.formattedValue"]');
+        
+        let sum = 0;
 
-    //     // REMOVE THE SELECTED ITEM
-    //     const updatedCartItems = cartItems.filter(item => item.id !== productid);
+        cartItems.forEach(cartItem => {
+            const price = parseFloat(cartItem.querySelector(".cart-product-amount").innerText.replace("₱", ""));
+            const quantity = parseInt(cartItem.querySelector(".cart-input").value);
 
-    //     // CALCULATE NEW TOTAL PRICE
-    //     const newTotalPrice = updatedCartItems.reduce((total, item) => {
-    //         return total + (item.amount * item.quantity); // PRICE * QUANTITY
-    //     }, 0)
+            subtotal.classList.add('blur');
+            totalAmount.classList.add('blur');
+        
+            sum += price * quantity;
+        });
+        setTimeout(() => {
+            subtotal.classList.remove('blur');
+            totalAmount.classList.remove('blur');
 
-    //     // UPDATE LOCALSTORAGE
-    //     localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
-    //     localStorage.setItem('totalPrice', newTotalPrice.toFixed(2)); // SAVE UPDATED TOTAL PRICE
+            subtotal.innerHTML = `₱${sum.toFixed(2)}`;
+            totalAmount.innerHTML = `₱${sum.toFixed(2)}`;
 
-    //     return { updatedCartItems, newTotalPrice }; // RETURN UPDATED DATA
-    // }
-    
-    // function updateCartUI(updatedCartItems) {
-    //     // UPDATE CART PAGE
-    //     const cartContainer = document.querySelector('.cart-items-container');
-    //     cartContainer.innerHTML = ''; // CLEAR THE EXISTING ITEMS
-    //     updatedCartItems.forEach(product => displayCartItems(product, cartContainer));
+            const savedTotal = document.querySelector('[data-hook="SubTotals.subtotalText"]').innerText.replace("₱", "");
+            localStorage.setItem('totalPrice', savedTotal);
+            // console.log('Saved totalPrice:', localStorage.getItem('totalPrice'));
+        }, 1000)
+    }
 
-    //     // UPDATE CART SIDEBAR
-    //     const cartSidebar = document.querySelector
-    // }
+    // CART ITEM LIST COUNTER
+    function itemsCounter() {
+        const { cartPageContainer, orderSummary, emptyCart } = cartPageItemsInitialSetup();
+        let { itemCartCounterText } = cartPageItemsInitialSetup();
 
-    // function setupRemoveButtons() {
-    //     const removeButtons = document.querySelectorAll('.remove-btn');
-    //     removeButtons.forEach(button => { 
-    //         button.addEventListener('click', (event) => { 
-    //             const productId = event.target.closest('.card').id; // GET THE PRODUCT ID
-    //             const updatedCartData = removeItemFromCart(productId); // REMOVE ITEM AND GET UPDATED DATA
-    //             updateCartUI(updatedCartData); // UPDATE THE UI WITH NEW DATA
-    //         });
-    //     });
-    // }
+        const cartItemCounter = document.querySelectorAll('.cart-input-group .cart-input');
+        let cartCounter = 0;
+        
+        cartItemCounter.forEach(itemCounter => {
+            let counterValue = parseInt(itemCounter.value);
+            let totalCountValue = cartCounter + counterValue;
+            cartCounter = totalCountValue;
+            itemCartCounterText.textContent = totalCountValue;
+
+            if(totalCountValue == 0) {
+                // TOGGLE IF THERE'S NO ITEM ON CART            
+                cartPageContainer.style.display = 'none';
+                orderSummary.style.display = 'none';
+                emptyCart.style.display = 'block';
+            }
+            else {
+                // TOGGLE IF THERE'S ITEM ON CART
+                cartPageContainer.style.display = 'block';
+                orderSummary.style.display = 'block';
+                emptyCart.style.display = 'none';
+            }
+        });
+    }
+
+    // REMOVE ITEM FROM THE CART AND ALSO FROM THE LOCALSTORAGE
+    function removeCartItem() {
+        const removeItemBtns = document.querySelectorAll('.remove-item-btn');
+        removeItemBtns.forEach(removeItemBtn => {
+            removeItemBtn.addEventListener('click', () => {
+                // REMOVE THE ITEM IN THE ITEM LIST WHEN THE REMOVE BTN CLICKED
+                const cardItem = removeItemBtn.parentElement;
+                const itemId = cardItem.id;
+
+                // REMOVE ITEM FROM DOM
+                cardItem.remove();
+
+                // APPLY BLUR EFFFECT CLASS TO THE TOTAL PRICE
+                document.querySelector('[data-hook="SubTotals.subtotalText"]').classList.add('blur');
+                document.querySelector('[data-hook="Total.formattedValue"]').classList.add('blur');
+
+                // REMOVE ITEM FROM LOCALSTORAGE
+                let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                cartItems = cartItems.filter(item => item.id !== itemId); // FILTER OUT THE REMOVED ITEM
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                
+                // UPDATE THE CART ITEM COUNTER
+                itemsCounter();
+                
+                setTimeout(() => {
+                    // UPDATE THE TOTAL PRICE
+                    updateCartTotalPrice();
+
+                    // CHECK IF THERE'S AN ITEM IN CART
+                    const itemCard = document.querySelector('.cart-items .card');
+
+                    const { cartPageContainer, orderSummary, emptyCart } = cartPageItemsInitialSetup();
+                    let { itemCartCounterText } = cartPageItemsInitialSetup();
+                    if(!itemCard) {
+                        cartPageContainer.style.display = 'none';
+                        orderSummary.style.display = 'none';
+                        emptyCart.style.display = 'block';
+                        itemCartCounterText.textContent = 0;
+                    }
+                }, 1000);
+            });
+        });
+    }
+
+    // MULTIPLE INPUT NUMBER INSIDE THE CART SIDEBAR
+    function addQuantityCartEventListeners(cartItem) {
+        const incrementBtn = cartItem.querySelector(".fa-plus");
+        const decrementBtn = cartItem.querySelector(".fa-minus");
+        const quantityInput = cartItem.querySelector(".cart-input");
+
+        const perItemSubtotal = cartItem.querySelector('.item-subtotal');
+        const price = parseFloat(cartItem.querySelector(".cart-product-amount").innerText.replace("₱", ""));
+        let itemSubtotal = 0;
+
+        incrementBtn.addEventListener("click", () => {
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+            updateCartTotalPrice(); // Update total price when quantity changes
+            itemsCounter(); // Update item count display when quantity changes
+            saveItemCartData(); // UPDATE THE QUANTITY ON LOCALSTORAGE
+            
+            perItemSubtotal.classList.add('blur');
+            setTimeout(() => {
+                perItemSubtotal.classList.remove('blur');
+                itemSubtotal = price * quantityInput.value;
+                perItemSubtotal.innerHTML = `₱${itemSubtotal.toFixed(2)}`;
+            }, 1000)
+        });
+        decrementBtn.addEventListener("click", () => {
+            if (quantityInput.value > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+                updateCartTotalPrice(); // Update total price when quantity changes
+                itemsCounter(); // Update item count display when quantity changes
+                saveItemCartData(); // UPDATE THE QUANTITY ON LOCALSTORAGE
+
+                perItemSubtotal.classList.add('blur');
+                setTimeout(() => {
+                    perItemSubtotal.classList.remove('blur');
+                    itemSubtotal = price * quantityInput.value;
+                    perItemSubtotal.innerHTML = `₱${itemSubtotal.toFixed(2)}`;
+                }, 1000)
+            }
+        });
+
+        quantityInput.addEventListener("change", () => {
+            if (quantityInput.value < 1) {
+                quantityInput.value = 1;
+            }
+            updateCartTotalPrice(); // Update total price when quantity changes
+            itemsCounter(); // Update item count display when quantity changes
+            saveItemCartData(); // UPDATE THE QUANTITY ON LOCALSTORAGE
+
+            perItemSubtotal.classList.add('blur');
+            setTimeout(() => {
+                perItemSubtotal.classList.remove('blur');
+                itemSubtotal = price * quantityInput.value;
+                perItemSubtotal.innerHTML = `₱${itemSubtotal.toFixed(2)}`;
+            }, 1000)
+        });
+    }
+
+    // SAVE CART DATA TO LOCALSTORAGE
+    function saveItemCartData() {
+        const cartItems = [];
+        document.querySelectorAll('.cart-items .card').forEach(cartItem => {
+        const id = cartItem.getAttribute('id');
+        const img = cartItem.querySelector('.product-img').src ;
+        const page = cartItem.querySelector('.product-img').getAttribute('data-page');
+        const name = cartItem.querySelector('.cart-product-name').textContent;
+        const amount = parseFloat(cartItem.querySelector('.cart-product-amount').textContent.replace('₱', ''));
+        const quantity = parseInt(cartItem.querySelector('.cart-input').value);
+        cartItems.push({ id, page, img, name, amount, quantity });
+        });
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        // console.log('Saved cartItems:', localStorage.getItem('cartItems'));
+        
+        if (cartItems.length === 0) {
+            localStorage.removeItem('cartItems');
+            // console.log('Cart is empty. Removed cartItems from localStorage.');
+        } else {
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            // console.log('Cart data saved to localStorage:', JSON.stringify(cartItems, null, 2));
+        }
+    }
 });

@@ -178,12 +178,7 @@ header nav .container-fluid .input-group .form-outline input {
   box-shadow: none;
   padding: 6px 0;
 }
-header nav .container-fluid .input-group .form-outline input::-moz-placeholder {
-  color: rgb(var(--color-2));
-  font-size: 1.125rem;
-  font-family: "Times New Roman", sans-serif;
-}
-header nav .container-fluid .input-group .form-outline input::placeholder {
+header nav .container-fluid .input-group .form-outline input::placeholder, header nav .container-fluid .input-group .form-outline input::-webkit-input-placeholder, header nav .container-fluid .input-group .form-outline input::-moz-placeholder, header nav .container-fluid .input-group .form-outline input:-ms-input-placeholder, header nav .container-fluid .input-group .form-outline input::-ms-input-placeholder {
   color: rgb(var(--color-2));
   font-size: 1.125rem;
   font-family: "Times New Roman", sans-serif;
@@ -268,7 +263,7 @@ header .offcanvas .offcanvas-body .item-list .card .product-img {
   width: 80px;
   height: 80px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   cursor: pointer;
 }
 header .offcanvas .offcanvas-body .item-list .card .card-body {
@@ -452,7 +447,7 @@ header .offcanvas-backdrop.show {
   width: 100%;
   height: 330px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .features .container-fluid {
@@ -495,7 +490,7 @@ header .offcanvas-backdrop.show {
   width: 100%;
   height: 399px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .features .container-fluid .features-content .card-1 .card-body, .features .container-fluid .features-content .card-2 .card-body, .features .container-fluid .features-content .card-3 .card-body {
   width: 100%;
@@ -552,7 +547,7 @@ header .offcanvas-backdrop.show {
   width: 240px;
   height: 240px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .items .container-fluid .carousel .card .card-body {
   width: 100%;
@@ -581,8 +576,8 @@ header .offcanvas-backdrop.show {
 .items .container-fluid .carousel.dragging .card {
   cursor: grab;
   -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 .items .container-fluid .arrow-btns {
   top: 38%;
@@ -796,7 +791,7 @@ header .offcanvas-backdrop.show {
   width: 100%;
   height: 280px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   cursor: pointer;
 }
 .category .container-fluid .row-2 .category-content .product-list .card .card-body {
@@ -1022,7 +1017,7 @@ header .offcanvas-backdrop.show {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -1062,7 +1057,7 @@ header .offcanvas-backdrop.show {
   height: 100%;
   cursor: pointer;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .blog .container-fluid .blog-post-list .post-list-item .post-list-description {
   width: 100%;
@@ -1089,7 +1084,7 @@ header .offcanvas-backdrop.show {
   width: 32px;
   height: 32px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
 }
 .blog .container-fluid .blog-post-list .post-list-item .post-list-description .post-header .column-1 .post-details {
@@ -1162,8 +1157,8 @@ header .offcanvas-backdrop.show {
   overflow: hidden;
   display: -webkit-box;
   text-overflow: ellipsis;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  --webkit-line-clamp: 3;
+  --webkit-box-orient: vertical;
   font-family: "Times New Roman", Times, serif;
   font-size: clamp(0.875rem, 0.298vw + 0.815rem, 1rem);
   line-height: clamp(1.313rem, 0.446vw + 1.223rem, 1.5rem);
@@ -1272,7 +1267,7 @@ header .offcanvas-backdrop.show {
   height: 32px;
   margin: 0;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
 }
 .blog .container-fluid .blog-post .blog-post-item .blog-post-header .column-1 .post-details {
@@ -1357,7 +1352,7 @@ header .offcanvas-backdrop.show {
   height: 213px;
   margin: 0 auto;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   display: block;
 }
 .blog .container-fluid .blog-post .blog-post-item .top {
@@ -1473,7 +1468,7 @@ header .offcanvas-backdrop.show {
   height: 28px;
   margin: 0;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
 }
 .blog .container-fluid .blog-post .comments .row-2 {
@@ -1488,10 +1483,7 @@ header .offcanvas-backdrop.show {
   font-size: clamp(0.875rem, 0.298vw + 0.815rem, 1rem);
   line-height: clamp(1.313rem, 0.446vw + 1.223rem, 1.5rem);
 }
-.blog .container-fluid .blog-post .comments .row-2 input[type=text]::-moz-placeholder {
-  color: rgb(var(--color-2));
-}
-.blog .container-fluid .blog-post .comments .row-2 input[type=text]::placeholder {
+.blog .container-fluid .blog-post .comments .row-2 input[type=text]::placeholder, .blog .container-fluid .blog-post .comments .row-2 input[type=text]::-webkit-input-placeholder, .blog .container-fluid .blog-post .comments .row-2 input[type=text]::-moz-placeholder, .blog .container-fluid .blog-post .comments .row-2 input[type=text]:-ms-input-placeholder, .blog .container-fluid .blog-post .comments .row-2 input[type=text]::-ms-input-placeholder {
   color: rgb(var(--color-2));
 }
 
@@ -1540,7 +1532,7 @@ header .offcanvas-backdrop.show {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   grid-area: 1/1/2/2;
   max-height: 181px;
 }
@@ -1774,7 +1766,7 @@ header .offcanvas-backdrop.show {
   width: 75px;
   height: auto;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   margin-right: 20px;
   cursor: pointer;
 }
@@ -1908,11 +1900,7 @@ header .offcanvas-backdrop.show {
   font-size: clamp(1rem, 0vw + 1rem, 1rem);
   line-height: clamp(1.6rem, 0vw + 1.6rem, 1.6rem);
 }
-.cart-section .container-fluid .cart-container .coupon-notes .coupon .show input[type=text]::-moz-placeholder, .cart-section .container-fluid .cart-container .coupon-notes .buyer-note .show input[type=text]::-moz-placeholder {
-  padding: 8px 12px;
-  color: rgb(var(--color-2));
-}
-.cart-section .container-fluid .cart-container .coupon-notes .coupon .show input[type=text]::placeholder, .cart-section .container-fluid .cart-container .coupon-notes .buyer-note .show input[type=text]::placeholder {
+.cart-section .container-fluid .cart-container .coupon-notes .coupon .show input[type=text]::placeholder, .cart-section .container-fluid .cart-container .coupon-notes .coupon .show input[type=text]::-webkit-input-placeholder, .cart-section .container-fluid .cart-container .coupon-notes .coupon .show input[type=text]::-moz-placeholder, .cart-section .container-fluid .cart-container .coupon-notes .coupon .show input[type=text]:-ms-input-placeholder, .cart-section .container-fluid .cart-container .coupon-notes .coupon .show input[type=text]::-ms-input-placeholder, .cart-section .container-fluid .cart-container .coupon-notes .buyer-note .show input[type=text]::placeholder, .cart-section .container-fluid .cart-container .coupon-notes .buyer-note .show input[type=text]::-webkit-input-placeholder, .cart-section .container-fluid .cart-container .coupon-notes .buyer-note .show input[type=text]::-moz-placeholder, .cart-section .container-fluid .cart-container .coupon-notes .buyer-note .show input[type=text]:-ms-input-placeholder, .cart-section .container-fluid .cart-container .coupon-notes .buyer-note .show input[type=text]::-ms-input-placeholder {
   padding: 8px 12px;
   color: rgb(var(--color-2));
 }
@@ -1923,10 +1911,7 @@ header .offcanvas-backdrop.show {
   font-size: clamp(1rem, 0vw + 1rem, 1rem);
   line-height: clamp(1.4rem, 0vw + 1.4rem, 1.4rem);
 }
-.cart-section .container-fluid .cart-container .coupon-notes .coupon .show textarea::-moz-placeholder, .cart-section .container-fluid .cart-container .coupon-notes .buyer-note .show textarea::-moz-placeholder {
-  padding: 8px 12px;
-}
-.cart-section .container-fluid .cart-container .coupon-notes .coupon .show textarea::placeholder, .cart-section .container-fluid .cart-container .coupon-notes .buyer-note .show textarea::placeholder {
+.cart-section .container-fluid .cart-container .coupon-notes .coupon .show textarea::placeholder, .cart-section .container-fluid .cart-container .coupon-notes .coupon .show textarea::-webkit-input-placeholder, .cart-section .container-fluid .cart-container .coupon-notes .coupon .show textarea::-moz-placeholder, .cart-section .container-fluid .cart-container .coupon-notes .coupon .show textarea:-ms-input-placeholder, .cart-section .container-fluid .cart-container .coupon-notes .coupon .show textarea::-ms-input-placeholder, .cart-section .container-fluid .cart-container .coupon-notes .buyer-note .show textarea::placeholder, .cart-section .container-fluid .cart-container .coupon-notes .buyer-note .show textarea::-webkit-input-placeholder, .cart-section .container-fluid .cart-container .coupon-notes .buyer-note .show textarea::-moz-placeholder, .cart-section .container-fluid .cart-container .coupon-notes .buyer-note .show textarea:-ms-input-placeholder, .cart-section .container-fluid .cart-container .coupon-notes .buyer-note .show textarea::-ms-input-placeholder {
   padding: 8px 12px;
 }
 .cart-section .container-fluid .cart-container .coupon-notes .coupon .show .apply-btn, .cart-section .container-fluid .cart-container .coupon-notes .buyer-note .show .apply-btn {
@@ -2559,7 +2544,7 @@ footer .container-fluid p {
     width: 246px;
     height: 100%;
     -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
   .items .modal .modal-dialog .modal-content .modal-body .modal-column-2 {
     margin-left: 16px;
@@ -2715,7 +2700,7 @@ footer .container-fluid p {
     width: 50%;
     height: 492px;
     -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
     max-width: 936px;
   }
   .about .container-fluid .card .card-body {
@@ -2859,7 +2844,7 @@ footer .container-fluid p {
     position: absolute;
     left: 0;
     background: transparent;
-    -webkit-appearance: none;
+    --webkit-appearance: none;
   }
   .category .container-fluid .row-2 .sidebar .row-2 .accordion .accordion-item .accordion-collapse .accordion-body .slider-wrapper input[type=range]::-webkit-slider-thumb {
     width: 12px;
